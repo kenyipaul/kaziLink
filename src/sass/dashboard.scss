@@ -1,0 +1,32 @@
+.dashboard-view {
+
+
+    .dashboard {
+        gap: 1rem;
+        margin: auto;
+        display: grid;
+        max-width: 900px;
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        .dash-reports {
+            gap: .5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        
+            .report {
+                padding: 1.5rem;
+                border-radius: 1rem;
+                background-color: #fff;
+
+                h1 {
+                    margin-top: 1rem;
+                }
+            }
+        }
+
+    }
+
+}
