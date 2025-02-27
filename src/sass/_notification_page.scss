@@ -1,0 +1,39 @@
+.notification-page {
+
+    .notification-container {
+        padding: 1rem;
+        margin: 0 auto;
+        max-width: 1280px;
+    
+        .notifications {
+            gap: .5rem;
+            display: grid;
+            cursor: pointer;
+            
+            .notification {
+                gap: 1rem;
+                display: flex;
+                padding: 1rem 0;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+
+                .profile {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    border-radius: 50%;
+                    background: #ff0053;
+                }
+
+                .info {
+                    h2 {
+                        font-size: 1.3em;
+                    }
+                    p {
+                        color: #555;
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,101 @@
+.workers-page {
+
+    .workers-page-content {
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+
+    .top-bar {
+        gap: 1rem;
+        display: grid;
+        padding: 0 1rem;
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+        }
+
+        p {
+            color: #555;
+        }
+
+        .input-area {
+            input {
+                width: 100%;
+                outline: none;
+                padding: 1rem;
+                font-size: 1em;
+                border-radius: .5rem;
+                border: 1px solid #999;
+            }
+        }
+
+        .tags {
+            gap: .5rem;
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+
+            button {
+                border: none;
+                padding: .8rem;
+                border-radius: .7rem;
+                white-space: nowrap;
+
+                &:nth-child(1) {
+                    color: #fff;
+                    background: #0286EC;
+                }
+            }
+        }
+    }
+
+
+
+    .workers-list {
+        gap: 1rem;
+        display: grid;
+        padding: 1rem;
+    
+    
+        .worker {
+            gap: 1rem;
+            display: flex;
+            align-items: center;
+
+            .profile {
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
+                background: #0286EC;
+            }
+
+            .content {
+                gap: .5rem;
+                height: 100%;
+                display: flex;
+                padding: 1rem 0;
+                flex-direction: column;
+                justify-content: space-between;
+
+                h1 {
+                    font-size: clamp(1em, 5vw, 1.2em);
+                }
+                p {
+                    color: #999;
+                    font-size: .9em;
+                }
+                
+                button {
+                    border: none;
+                    color: #fff;
+                    padding: .7rem;
+                    cursor: pointer;
+                    width: fit-content;
+                    border-radius: .5rem;
+                    background: #0286EC;
+                }
+            }
+        }
+    }
+
+}

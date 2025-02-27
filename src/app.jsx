@@ -8,6 +8,8 @@ import EmployerDashboard from "./pages/employer_dashboard";
 import Login, { EmployerLogin, UserLogin } from "./forms/login";
 import WorkersPage from "./pages/workers_page";
 import JobsPage from "./pages/jobs_page";
+import NotificationPage from "./pages/notification_page";
+import JobDetails from "./pages/job_details";
 
 const router = createHashRouter([
     {
@@ -65,6 +67,14 @@ const router = createHashRouter([
             {
                 path: "/jobs",
                 element: <JobsPage />
+            },
+            {
+                path: "/notifications",
+                element: <NotificationPage />
+            },
+            {
+                path: "/job-details/:id",
+                element: <JobDetails />
             }
         ]
     }
