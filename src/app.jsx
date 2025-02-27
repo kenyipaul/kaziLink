@@ -3,6 +3,8 @@ import Content from "./components/content";
 import CreateJob from "./pages/createJob/createJob";
 import Registration, { EmployersForm, WorkersForm } from "./forms/registration";
 import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import UsersDashboard from "./pages/users_dashboard";
+import EmployerDashboard from "./pages/employer_dashboard";
 
 const router = createHashRouter([
     {
@@ -31,7 +33,14 @@ const router = createHashRouter([
                 path: "/createJob",
                 element: <CreateJob />
 
-            }
+            },
+            {    path: "/users/dashboard",
+                element: <UsersDashboard />
+            },
+            {
+                path: "/employer/dashboard",
+                element: <EmployerDashboard />
+            },
         ]
     }
 ])
