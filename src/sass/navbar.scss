@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: auto;
+
+    .logo{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .navbar-buttons{
+        display: flex;
+        gap: 1rem;
+        font-weight: bold;
+       
+
+
+        :nth-child(1){
+            color: #fff;
+            background: #2194F2 ;
+
+        }
+
+        button{
+            border-radius: 1rem;
+            padding: 1rem 2rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+        }
+
+    }
+}
+
+.content-container{
+    max-width: 1200px;
+    margin: auto;
+
+    .center{
+        display: flex;
+
+    }
+
+}
