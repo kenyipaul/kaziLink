@@ -1,0 +1,145 @@
+.users-dashboard {
+
+    .user-info-container {
+        padding: 1.5rem;
+        max-width: 1280px;
+        margin: 0 auto;
+
+        section:nth-child(1) {
+            gap: 1rem;
+            display: grid;
+            margin-bottom: 2rem;
+
+            .profile-image {
+                width: 8rem;
+                height: 8rem;
+                border-radius: 50%;
+                background-size: cover;
+                background-position: center;
+                background-image: url(/profile.jpg);
+            }
+
+            .user-info {
+                h4 {
+                    color: #999;
+                    font-weight: 500;
+                }
+
+                .reports {
+                    gap: 1rem;
+                    display: flex;
+                    margin: 1rem 0;
+                    align-items: center;
+
+                    h3 {
+                        gap: .5rem;
+                        display: flex;
+                        font-size: 1em;
+                        align-items: center;
+
+                        &:nth-child(1) svg { color: #0286EC; }
+                        &:nth-child(2) svg { color: #0f0; }
+                    }
+                }
+            }
+        }
+    
+
+        section:nth-child(2) {
+            gap: 2rem;
+            display: grid;
+
+            .section {
+                gap: 1rem;
+                display: grid;
+            }
+
+            .about-section {
+                p {
+                    color: #555;
+                }
+            }
+
+            .skill-section {
+                .skill-grid {
+                    gap: .5rem;
+                    display: flex;
+
+                    p {
+                        padding: 1rem;
+                        font-size: .9em;
+                        border-radius: 1rem;
+                        background: #F0F2F5;
+                    }
+                }
+            }
+
+
+            .work-history-section {
+                .work-history-grid {
+                    gap: 1rem;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+                    .work-history {
+                        gap: .5rem;
+                        padding: 1rem;
+                        display: grid;
+                        border-radius: .5rem;
+                        border: 1px solid #ddd;
+
+                        h4 {
+                            color: #999;
+                            font-weight: 500;
+                        }
+
+                        h1 {
+                            font-size: clamp(1.1em, 5vw, 1.3em);
+                        }
+
+                        p {
+                            color: #555;
+                            margin: .5rem 0;
+                        }
+
+                        button {
+                            border: none;
+                            cursor: pointer;
+                            width: fit-content;
+                            border-radius: .5rem;
+                            padding: .7rem 1rem;
+                        }
+                    }
+                }
+            }
+
+
+
+            .testimonial-section {
+                .testimonial-grid {
+                    gap: 1rem;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                
+                    .testimony {
+                        padding: 1.5rem;
+                        border-radius: 1rem;
+                        box-shadow: 0 .3rem 1rem #eee;
+
+                        svg {
+                            color: #999;
+                        }
+
+                        p {
+                            color: #555;
+                            margin: 1rem 0;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}

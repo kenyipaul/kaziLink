@@ -2,6 +2,8 @@ import Navbar from "./components/navbar"
 import Content from "./components/content";
 import Registration, { EmployersForm, WorkersForm } from "./forms/registration";
 import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import UsersDashboard from "./pages/users_dashboard";
+import EmployerDashboard from "./pages/employer_dashboard";
 
 const router = createHashRouter([
     {
@@ -25,7 +27,15 @@ const router = createHashRouter([
                         element: <EmployersForm />
                     }
                 ]
-            }
+            },
+            {
+                path: "/users/dashboard",
+                element: <UsersDashboard />
+            },
+            {
+                path: "/employer/dashboard",
+                element: <EmployerDashboard />
+            },
         ]
     }
 ])

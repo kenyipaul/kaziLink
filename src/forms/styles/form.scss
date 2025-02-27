@@ -5,10 +5,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    flex-direction: column;
+    
+    
 
     .form-container {
-        gap: 2rem;
+        gap: 1rem;
         width: 100%;
         display: grid;
         padding: 1rem;
@@ -34,11 +36,17 @@
             background: #f2f2f2;
         }
 
+        .form-view {
+            gap: 1rem;
+            display: grid;
+        }
+
         .form {
             gap: 1rem;
             display: grid;
             padding: min(5rem, 8%);
             border: 1px solid #ddd;
+
 
             .input-area {
                 display: grid;
