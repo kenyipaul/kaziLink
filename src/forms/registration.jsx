@@ -5,12 +5,10 @@ export default function Registration() {
     return (
         <div id="form-view">
 
-            <Router>
                 <Routes>
                     <Route path="/" element={<WorkersForm />} />
                     <Route path="/register/employer" element={<EmployersForm /> } />
                 </Routes>
-            </Router>
 
         </div>
     )
