@@ -127,6 +127,8 @@
                 flex-wrap: wrap;
                 margin-top: 1rem;
 
+               
+
                 .skill {
                     padding: 1rem;
                     cursor: pointer;
@@ -138,6 +140,11 @@
                     &:hover {
                         background: #d3e3fc;
                     }
+                     &.active{
+                    background: #2194f2;
+                    color: #fff;
+
+                }
                 }
             }
         }

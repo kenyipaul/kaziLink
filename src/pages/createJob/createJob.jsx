@@ -28,14 +28,14 @@ export default function CreateJob() {
               <h3>Start Date</h3>
               <MdOutlineCalendarMonth style={{ fontSize: "20px" }} />
             </div>
-            <input type="text" />
+            <input type="date" />
           </div>
           <div className="end-date">
             <div className="end">
               <h3>End Date</h3>
               <MdOutlineCalendarMonth style={{ fontSize: "20px" }} />
             </div>
-            <input type="text" />
+            <input type="date" />
           </div>
           <div className="duration">
             <h3>Duration</h3>
