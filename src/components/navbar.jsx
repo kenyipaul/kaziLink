@@ -32,16 +32,28 @@ function UnauthorizedNav() {
     
     const location = useLocation();
 	const path = location.pathname;
+    const navigate = useNavigate();
 
     return (
         <>
-            {path.includes("/register") && (
+            {path == "/register" && (
                 <div className="navbar-buttons">
-                    <button onClick={() => navigate("/register")}>
-                        Join as Worker
+                    <button onClick={() => navigate("/login")}>
+                        Login
                     </button>
                     <button onClick={() => navigate("/register/employer")}>
                         Join as Employer
+                    </button>
+                </div>
+            )}
+
+{path == "/register/employer" && (
+                <div className="navbar-buttons">
+                    <button onClick={() => navigate("/login")}>
+                        Login
+                    </button>
+                    <button onClick={() => navigate("/register")}>
+                        Join as Worker
                     </button>
                 </div>
             )}
@@ -51,6 +63,7 @@ function UnauthorizedNav() {
                     <button onClick={() => navigate("/login/employer")}>
                         Login as Worker
                     </button>
+                    <button onClick={() => navigate("/register")}>Register</button>
                 </div>
             )}
 
@@ -59,6 +72,7 @@ function UnauthorizedNav() {
                     <button onClick={() => navigate("/login")}>
                         Login as Employer
                     </button>
+                    <button onClick={() => navigate("/register")}>Register</button>
                 </div>
             )}
         </>
