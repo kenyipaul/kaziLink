@@ -38,7 +38,41 @@
             font-size: .9em;
         }
        
+    }
 
+
+    .authorized-user-section {
+        gap: 2rem;
+        display: flex;
+        align-items: center;
+
+        ul {
+            gap: 1rem;
+            display: flex;
+            margin-right: 1rem;
+            align-items: center;
+
+            li {
+                color: #555;
+                font-size: .95em;
+                list-style: none;
+                cursor: pointer;
+            
+                a {
+                    color: #555;
+                    padding: .5rem;
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+
+        svg {
+            cursor: pointer;
+        }
     }
 }
 

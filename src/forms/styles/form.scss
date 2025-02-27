@@ -44,6 +44,7 @@
         .form {
             gap: 1rem;
             display: grid;
+            border-radius: .5rem;
             padding: min(5rem, 8%);
             border: 1px solid #ddd;
 
@@ -64,6 +65,18 @@
                     font-size: 1em;
                     background: none;
                     border-bottom: 1px solid #ddd;
+                }
+
+                .input-group {
+                    gap: 1rem;
+                    display: grid;
+                    grid-template-columns: 50px 1fr;
+
+                    input:nth-child(1) { 
+                        color: #999; 
+                        text-align: center;
+                        pointer-events: none; 
+                    }
                 }
             }
 
