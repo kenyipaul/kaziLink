@@ -2,6 +2,8 @@ import Form from "./form"
 import "./styles/form.scss";
 import { Outlet } from "react-router-dom";
 
+
+
 export default function Registration() {
     return (
         <div id="form-view">
@@ -10,7 +12,7 @@ export default function Registration() {
 
         </div>
     )
-}
+}``
 
 export function WorkersForm() {
     return (
