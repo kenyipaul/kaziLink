@@ -1,0 +1,138 @@
+.create-job-section{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem ;
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    
+    .create-header{
+        h1{
+            margin-bottom: 1rem;
+        }
+        p{
+            color: #0286EC;
+        }
+    }
+
+    .job-input{
+        margin-top: 4rem;
+        .title{
+            margin-bottom: 2rem;
+            ::placeholder{
+                font-size: 1.2em;
+                color: rgba(0, 94, 255, 0.712);
+            }
+            
+            input[type="text"]{
+                width: 100%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+        }
+
+        .description{
+            margin-top: 2rem;
+            ::placeholder{
+                font-size: 1.2em;
+                color: rgba(0, 94, 255, 0.712);
+            }
+            textarea{
+                width: 100%;
+                padding: 4rem 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem;
+            }
+        }
+        .payment{
+            margin-top: 2rem;
+
+            ::placeholder{
+            font-size: 1.2em;
+            color: rgba(0, 94, 255, 0.712);
+            }
+            input{
+                width: 100%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+        }
+        .start-date{
+            margin-top: 2rem;
+            input{
+                width: 50%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+            .start{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+        } 
+        .end-date{
+            margin-top: 2rem;
+            input{
+                width: 50%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+            .end{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+         .duration{
+            margin-top: 2rem;
+            ::placeholder{
+                font-size: 1.2em;
+                color: rgba(0, 94, 255, 0.712);
+            }
+            input{
+                width: 100%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+        } 
+        .location{
+            margin-top: 2rem;
+            ::placeholder{
+                font-size: 1.2em;
+                color: rgba(0, 94, 255, 0.712);
+            }
+            select{
+                width: 100%;
+                padding: 1rem;
+                margin-top: .5rem;
+                border: 1px solid #000;
+                border-radius:.5rem ;
+            }
+        }
+        .post-job{
+            margin-top: 2rem;
+            button{
+                width: 100%;
+                padding: 1rem 2rem;
+                background-color: #0286EC;
+                color: #fff;
+                border: none;
+                border-radius:.5rem;
+                cursor: pointer;
+            }
+        }
+
+    }
+
+}
