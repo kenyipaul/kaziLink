@@ -47,8 +47,7 @@ const router = createHashRouter([
                 ]
             },
             {
-                path: "/users/dashboard",
-                path: "/createJob",
+                path: "/create",
                 element: <CreateJob />
 
             },
@@ -66,10 +65,6 @@ const router = createHashRouter([
             {
                 path: "/jobs",
                 element: <JobsPage />
-            },,
-            {
-                path: "/create",
-                element: <h1>Create</h1>
             }
         ]
     }
