@@ -1,20 +1,17 @@
 import "./styles/form.scss";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export default function Registration() {
     return (
         <div id="form-view">
 
-                <Routes>
-                    <Route path="/" element={<WorkersForm />} />
-                    <Route path="/register/employer" element={<EmployersForm /> } />
-                </Routes>
+            <Outlet />
 
         </div>
     )
 }
 
-function WorkersForm() {
+export function WorkersForm() {
     return (
         <div id="form-view">
             <div className="form-container">
@@ -27,7 +24,7 @@ function WorkersForm() {
     )
 }
 
-function EmployersForm() {
+export function EmployersForm() {
     return (
         <div id="form-view">
             <div className="form-container">

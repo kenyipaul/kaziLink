@@ -1,9 +1,7 @@
-import OTPForm from "./forms/modules/otp_form";
-import Registration from "./forms/registration";
-import WorkerRegistration from "./forms/worker_registration";
-import AdminDashboard from "./pages/admin_dashboard";
-import Navbar from "./components/navbar/navbar";
-import { HashRouter as Router, Routes, Route, createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import Navbar from "./components/navbar"
+import Content from "./components/content";
+import Registration, { EmployersForm, WorkersForm } from "./forms/registration";
+import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const router = createHashRouter([
     {
@@ -12,11 +10,21 @@ const router = createHashRouter([
         children: [
             {
                 path: "/",
-                element: <h1>Home</h1>
+                element: <Content />
             },
             {
                 path: "/register",
-                element: <Registration />
+                element: <Registration />,
+                children: [
+                    {
+                        path: "/register",
+                        element: <WorkersForm />
+                    },
+                    {
+                        path: "/register/employer",
+                        element: <EmployersForm />
+                    }
+                ]
             }
         ]
     }
@@ -26,27 +34,13 @@ function Home() {
     return (
         <div>
             <Navbar />
-            {Outlet}
+            <Outlet />
         </div>
     )
 }
 
 export default function App() {
     return (
-        <div>
-
-            <RouterProvider router={router} />
-
-            {/* <AdminDashboard /> */}
-            {/* <WorkerRegistration /> */}
-            {/* <OTPForm /> */}
-            {/* <Router>
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={ <AdminDashboard /> } />
-                </Routes>
-            </Router> */}
-            
-        </div>
+        <RouterProvider router={router} />
     )
 }
