@@ -1,0 +1,146 @@
+@use "./otp_form" as *;
+
+#form-view {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .form-container {
+        gap: 2rem;
+        width: 100%;
+        display: grid;
+        padding: 1rem;
+        max-width: 500px;
+    
+        .form-header {
+            gap: .5rem;
+            display: grid;
+            margin-bottom: 1rem;
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .info {
+                color: #2194F2;
+            }
+        }
+
+        .disclaimer {
+            padding: 1rem;
+            border-radius: .5rem;
+            background: #f2f2f2;
+        }
+
+        .form {
+            gap: 1rem;
+            display: grid;
+            padding: min(5rem, 8%);
+            border: 1px solid #ddd;
+
+            .input-area {
+                display: grid;
+
+                label {
+                    font-size: .95em;
+
+                    span { color: #ff0053; }
+                }
+
+                input, select {
+                    border: none;
+                    outline: none;
+                    padding: 1rem 0;
+                    font-size: 1em;
+                    background: none;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+
+            .input-group {
+                gap: 1rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .inputs {
+                gap: 1rem;
+                display: grid;
+                grid-template-columns: 3rem 1fr;
+
+                input {
+                    &:nth-child(1) { color: #999;  pointer-events: none; text-align: center;}
+                    &:nth-child(2)[type="number"]::-webkit-outer-spin-button,
+                    &:nth-child(2)[type="number"]::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    &:nth-child(2)[type="number"] {
+                        appearance: textfield;
+                    -moz-appearance: textfield;
+                    }
+                }
+            }
+
+        }
+
+        button {
+            border: none;
+            color: #fff;
+            padding: 1rem;
+            max-width: 8rem;
+            cursor: pointer;
+            font-size: .95em;
+            border-radius: .4rem;
+            background: #2194F2;
+        }
+
+        .skill-area {
+            
+            .skill-grid {
+                gap: .5rem;
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+
+                .skill {
+                    padding: 1rem;
+                    cursor: pointer;
+                    font-size: .9em;
+                    width: fit-content;
+                    border-radius: .8rem 1rem;
+                    background: #E8EDF5;
+
+                    &:hover {
+                        background: #d3e3fc;
+                    }
+                }
+            }
+        }
+
+        .password-area {
+            gap: 1rem;
+            display: grid;    
+
+            .input-area {
+                display: grid;    
+    
+                label {
+                    font-size: .95em;
+                }
+    
+                input {
+                    border: none;
+                    outline: none;
+                    padding: 1rem 0;
+                    font-size: 1em;
+                    background: none;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+        }
+    }
+}
