@@ -17,8 +17,11 @@ export default function CreateJob() {
     const startDateRef = useRef();
     const descriptionRef = useRef();
     const locationRef = useRef();
+	const typeRef = useRef()
 
     const submit = () => {
+
+		const type = typeRef.current.value;
         const title = titleRef.current.value;
         const payment = paymentRef.current.value;
         const endDate = endDateRef.current.value;
@@ -35,8 +38,7 @@ export default function CreateJob() {
 				method: "POST",
 				url: "http://localhost:9000/api/v1/jobs",
 				data: {
-					title, payment, endDate, startDate, location, description,
-					token
+					title, payment, endDate, startDate, location, description, type, token
 				}
 			}).then((res) => {
 				console.log(res);
@@ -99,7 +101,7 @@ export default function CreateJob() {
 
 				<div className="input-area">
 					<label htmlFor="type">Employment Type</label>
-					<select name="location" ref={locationRef}>
+					<select name="location" ref={typeRef}>
 						<option value="gig">Gig</option>
 						<option value="part-time">Part-time</option>
 						<option value="full-time">Full-time</option>

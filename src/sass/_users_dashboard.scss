@@ -122,7 +122,32 @@
                 .work-history-grid {
                     gap: 1rem;
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+                    .work-history-skeleton {
+                        height: 190px;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #ddd;
+                        justify-content: center;
+                        flex-direction: column;
+                        border-radius: .5rem;
+
+                        p {
+                            color: #555;
+                            margin: 1rem 0;
+                            font-size: 0.9em;
+                            max-width: 300px;
+                            text-align: center;
+                        }
+
+                        button {
+                            border: none;
+                            padding: 1rem;
+                            cursor: pointer;
+                            border-radius: .5rem;
+                        }
+                    }
 
                     .work-history {
                         gap: .5rem;
@@ -163,7 +188,26 @@
                     gap: 1rem;
                     display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                
+
+                    .testimony-skeleton {
+                        height: 190px;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #ddd;
+                        justify-content: center;
+                        flex-direction: column;
+                        border-radius: .5rem;
+
+                        p {
+                            color: #555;
+                            margin: 1rem 0;
+                            font-size: 0.9em;
+                            max-width: 300px;
+                            text-align: center;
+                        }
+
+                    }
+
                     .testimony {
                         padding: 1.5rem;
                         border-radius: 1rem;

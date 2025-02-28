@@ -86,6 +86,7 @@ function Job(props) {
 
     const view = () => {
         navigate(`/job-details/${props.data._id}`);
+        sessionStorage.setItem("active_job", JSON.stringify(props.data));
     }
 
     return (

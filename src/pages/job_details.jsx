@@ -1,5 +1,5 @@
 import Axios from "axios";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 
@@ -8,20 +8,24 @@ export default function JobDetails() {
     const location = useLocation();
     const tmp_id = location.pathname.split('/');
     const job_id = tmp_id[tmp_id.length - 1];
+    const navigate = useNavigate();
 
+    const [currentTab, setCurrentTab] = useState(0);
     const [jobDetails, setJobDetails] = useState({});
     const jobsState = useSelector(state => state.jobsState);
     const userState = useSelector(state => state.userState);
 
     useEffect(() => {
 
-        const job_details = jobsState.jobs.filter(job => {
-            return job._id == job_id;
-        })
+        let activeJob = sessionStorage.getItem("active_job");
 
-        setJobDetails(job_details[0]);
+        if (activeJob == null) {
+            navigate("/jobs");
+        } else {
+            activeJob = JSON.parse(activeJob);
+            setJobDetails(activeJob);
+        }
 
-        console.log(job_details);
     }, [location]);
 
 
@@ -30,8 +34,11 @@ export default function JobDetails() {
             method: "PATCH",
             url: `http://localhost:9000/api/v1/jobs/${job_id}`,
             data: {
-                workers: [...jobDetails.workers, userState.user._id],
+                workers: [...jobDetails.workers, userState.userData._id],
             }
+        }).then((response) => {
+            setJobDetails(response.data.data.updatedJob)
+            sessionStorage.setItem("active_job", JSON.stringify(response.data.data.updatedJob));
         })
     }
 
@@ -43,6 +50,12 @@ export default function JobDetails() {
                     <p>Your experience matters. On KaziLink, employers are looking for workers with real-world skills and verified work histories—exactly like yours.</p>
                 </div>
 
+                <div className="nav-bar">
+                    <button className={currentTab === 0 && "active"} onClick={() => setCurrentTab(0)} >Job Details</button>
+                    <button className={currentTab === 1 && "active"} onClick={() => setCurrentTab(1)} >Applicants</button>
+                </div>
+
+                {currentTab === 0 ?
                 <div className="about-section">
                     <h1>{jobDetails.title} - {jobDetails.location}</h1>
 
@@ -73,9 +86,45 @@ export default function JobDetails() {
                             <h3>{new Date(jobDetails.endDate).toLocaleDateString()}</h3>
                         </div>
                     </div>
+                    { jobDetails.workers && jobDetails.workers.includes(userState.userData._id) ?
+                        <button className="pending" onClick={apply}>Application Pending</button> :
+                        <button onClick={apply}>Apply Now</button>
+                    }
+                </div> :
 
-                    <button onClick={apply}>Apply Now</button>
-                </div>
+                    <div className="applicant-section">
+                        <div className="top-bar">
+
+                        </div>
+                        <div className="users">
+
+                            <Worker />
+                            <Worker />
+                            <Worker />
+                            <Worker />
+                            <Worker />
+                            <Worker />
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    )
+}
+
+
+function Worker() {
+    return (
+        <div className="user">
+            <div className="profile">
+                <div className="cover"></div>
+                <h1>John Doe</h1>
+            </div>
+
+            <div className="actions">
+                <button>View Profile</button>
+                <button>Hire</button>
             </div>
         </div>
     )

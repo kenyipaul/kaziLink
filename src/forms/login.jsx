@@ -1,9 +1,13 @@
 import Axios from "axios";
-import { Outlet } from "react-router-dom"
+import {Outlet, useNavigate} from "react-router-dom"
 import {useRef, useState} from "react";
+import { setUser, setAuthorized} from "../store/states/user.state.js";
+import {useDispatch} from "react-redux";
 
 export default function Login() {
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [phone, setPhone] = useState("")
     const passRef = useRef(null)
 
@@ -18,7 +22,23 @@ export default function Login() {
             url: "http://localhost:9000/api/v1/users/login",
             data: { password, phone }
         }).then((response) => {
-            console.log(response)
+            if (response.data.success === "success") {
+                dispatch(setAuthorized(true));
+                dispatch(setUser(response.data.data));
+
+                localStorage.setItem("_kazi_token", response.data.token)
+                localStorage.setItem("_kazi_user", JSON.stringify(response.data.data))
+
+                if (response.data.data.role === "employer") {
+                    navigate("/workers");
+                } else {
+                    navigate("/jobs");
+                }
+            }
+        }).catch((error) => {
+            if (error.response.data.status === "error") {
+                alert(error.response.data.message)
+            }
         })
     }
 
