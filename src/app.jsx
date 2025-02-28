@@ -1,6 +1,7 @@
 import Navbar from "./components/navbar"
 import Content from "./components/content";
 import CreateJob from "./pages/createJob/createJob";
+import Chat from "./pages/chat.jsx";
 import Registration, { EmployersForm, WorkersForm } from "./forms/registration";
 import { createHashRouter, Outlet, RouterProvider, useNavigate } from "react-router-dom";
 import UsersDashboard from "./pages/users_dashboard";
@@ -98,6 +99,10 @@ const router = createHashRouter([
             {
                 path: "/otp/verification",
                 element: <OTPForm />
+            },
+            {
+                path: "/chat",
+                element: <Chat />
             }
         ]
     }
