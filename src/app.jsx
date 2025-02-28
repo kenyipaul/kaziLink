@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {setUser, setAuthorized} from "./store/states/user.state"
 import WorkersDashboard from "./pages/workers_dashboard.jsx";
+import OTPForm from "./forms/modules/otp_form.jsx";
 
 // const userState = useSelector(store => store.userState);
 
@@ -76,6 +77,10 @@ const router = createHashRouter([
             {
                 path: "/job-details/:id",
                 element: <JobDetails />
+            },
+            {
+                path: "/otp/verification",
+                element: <OTPForm />
             }
         ]
     }
@@ -85,6 +90,8 @@ function Home() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const userState = useSelector((store) => store.userState);
 
     useEffect(() => {
         let user = localStorage.getItem("_kazi_user")
@@ -99,10 +106,22 @@ function Home() {
             dispatch(setUser(user));
             dispatch(setAuthorized(true));
         }
+
     }, [])
 
     return (
         <div>
+
+            {
+                userState.userData &&
+                userState.userData.verifyNumber ?
+                    <></> :
+                <div className={userState.userData.verifyNumber ? "notification-alert active" : "notification-alert active"}>
+                    <p>To gain full control over you account, please verify</p>
+                    <button onClick={() => navigate("/otp/verification")}>Verify</button>
+                </div>
+            }
+
             <Navbar />
             <Outlet />
         </div>

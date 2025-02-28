@@ -6,3 +6,32 @@
 @use "./notification_page";
 @use "./job_details_page";
 
+
+.notification-alert {
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    max-height: 0;
+
+    &.active {
+        max-height: fit-content;
+        background: #ff0053;
+        padding: .8rem 1rem;
+    }
+
+    p {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    button {
+        border: none;
+        cursor: pointer;
+        background: #fff;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+    }
+}

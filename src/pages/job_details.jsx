@@ -50,10 +50,11 @@ export default function JobDetails() {
                     <p>Your experience matters. On KaziLink, employers are looking for workers with real-world skills and verified work histories—exactly like yours.</p>
                 </div>
 
+                { userState.userData.role === "employer" &&
                 <div className="nav-bar">
                     <button className={currentTab === 0 && "active"} onClick={() => setCurrentTab(0)} >Job Details</button>
                     <button className={currentTab === 1 && "active"} onClick={() => setCurrentTab(1)} >Applicants</button>
-                </div>
+                </div> }
 
                 {currentTab === 0 ?
                 <div className="about-section">
@@ -86,9 +87,12 @@ export default function JobDetails() {
                             <h3>{new Date(jobDetails.endDate).toLocaleDateString()}</h3>
                         </div>
                     </div>
-                    { jobDetails.workers && jobDetails.workers.includes(userState.userData._id) ?
-                        <button className="pending" onClick={apply}>Application Pending</button> :
-                        <button onClick={apply}>Apply Now</button>
+                    { userState.userData.role === "worker" &&
+                        <>{
+                            jobDetails.workers && jobDetails.workers.includes(userState.userData._id) ?
+                            <button className="pending" onClick={apply}>Application Pending</button> :
+                            <button onClick={apply}>Apply Now</button>
+                        }</>
                     }
                 </div> :
 

@@ -206,6 +206,14 @@
                             text-align: center;
                         }
 
+                        button {
+                            border: none;
+                            cursor: pointer;
+                            width: fit-content;
+                            border-radius: .5rem;
+                            padding: .7rem 1rem;
+                        }
+
                     }
 
                     .testimony {
@@ -221,6 +229,8 @@
                             color: #555;
                             margin: 1rem 0;
                         }
+
+
                     }
                 }
             }

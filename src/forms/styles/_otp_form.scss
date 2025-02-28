@@ -31,6 +31,14 @@
             display: flex;
             align-items: center;
 
+            .input-group {
+                gap: .5rem;
+                display: grid;
+                margin-top: 1rem;
+                text-align: center;
+                grid-template-columns: 60px 1fr;
+            }
+
             .input-area {
                 gap: .5rem;
                 display: grid;

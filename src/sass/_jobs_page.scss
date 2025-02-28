@@ -38,10 +38,11 @@
             button {
                 border: none;
                 padding: .8rem;
+                cursor: pointer;
                 border-radius: .7rem;
                 white-space: nowrap;
 
-                &:nth-child(1) {
+                &.active {
                     color: #fff;
                     background: #0286EC;
                 }
@@ -58,23 +59,41 @@
         .job {
             display: flex;
             padding: 1rem;
+            cursor: pointer;
             border-radius: .5rem;
             border: 1px solid #ddd;
         
             .content {
-                h3 {
+                h4 {
                     color: #999;
                     font-weight: 500;
-                    font-size: .9em;
+                    font-size: .95em;
+                    text-transform: capitalize;
                 }
 
                 h1 {
+                    margin: .3rem 0;
                     font-size: clamp(1.2em, 5vw, 1.5em);
                 }
 
+                h3 {
+                    font-weight: 500;
+                }
+
                 p {
-                    color: #555;
-                    margin: .5rem 0;
+                    color: #0286EC;
+                    //margin-top: 1rem;
+                }
+
+                .footer {
+                    gap: 1rem;
+                    display: flex;
+                    margin-top: 1rem;
+                    align-items: center;
+
+                    h5 {
+                        font-size: 1em;
+                    }
                 }
 
                 button {
