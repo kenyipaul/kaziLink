@@ -2,7 +2,7 @@
 
     .user-info-container {
         padding: 1.5rem;
-        max-width: 1280px;
+        max-width: 900px;
         margin: 0 auto;
 
         section:nth-child(1) {
@@ -41,6 +41,24 @@
                         &:nth-child(2) svg { color: #0f0; }
                     }
                 }
+
+                .buttons {
+                    gap: .5rem;
+                    display: flex;
+                    align-items: center;
+
+                    button {
+                        border: none;
+                        cursor: pointer;
+                        padding: .7rem 1rem;
+                        border-radius: 0.5rem;
+
+                        &:nth-child(1) {
+                            color: #fff;
+                            background: #0286EC;
+                        }
+                    }
+                }
             }
         }
     
@@ -55,6 +73,31 @@
             }
 
             .about-section {
+                padding: 1rem;
+                border: 1px solid #ddd;
+
+                .top-bar {
+                    display: flex;
+                    padding: 0 0 1rem 0;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #ddd;
+
+                    h1 {
+                        font-size: 1.3em;
+                    }
+                
+                    button {
+                        gap: .5rem;
+                        display: flex;
+                        font-size: 1em;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        justify-content: center;
+                    }
+                }
+
                 p {
                     color: #555;
                 }
@@ -119,7 +162,7 @@
                 .testimonial-grid {
                     gap: 1rem;
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
                 
                     .testimony {
                         padding: 1.5rem;

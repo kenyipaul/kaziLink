@@ -47,7 +47,7 @@ function UnauthorizedNav() {
                 </div>
             )}
 
-{path == "/register/employer" && (
+            {path == "/register/employer" && (
                 <div className="navbar-buttons">
                     <button onClick={() => navigate("/login")}>
                         Login
@@ -81,13 +81,26 @@ function UnauthorizedNav() {
 
 
 function AuthorizedNav(props) {
+
+    const userState = useSelector(store => store.userState)
+
     return (
         <div className={props.active ? `authorized-user-section active` : `authorized-user-section`}>
             <ul>
-                <li><Link to="/workers">Find a Worker</Link></li>
-                <li><Link to="/create">Create a Job</Link></li>
-                <li><Link to="/jobs">Active Jobs</Link></li>
-                <li><Link to="/users/dashboard">Profile</Link></li>
+                {
+                    userState.userData && userState.userData.role == "employer" ?
+                    <>
+                        <li><Link to="/workers">Find a Worker</Link></li>
+                        <li><Link to="/create">Create a Job</Link></li>
+                    </> :
+                    <li><Link to="/jobs">Find a Job</Link></li>
+                }
+
+                {
+                    userState.userData && userState.userData.role == "employer" ?
+                    <li><Link to="/employer/dashboard">Profile</Link></li> :
+                    <li><Link to="/users/dashboard">Profile</Link></li>
+                }
             </ul>
 
             <div className="buttons">

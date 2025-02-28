@@ -1,49 +1,93 @@
+import Axios from "axios";
+import {createContext, useContext, useEffect, useState} from "react";
+import {setJobState} from "../store/states/jobs.state.js";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 export default function JobsPage() {
+
+    const dispatch = useDispatch();
+    const [jobs, setJobs] = useState([]);
+    const jobsState = useSelector(state => state.jobsState);
+
+    useEffect(() => {
+
+        Axios({
+            method: "get",
+            url: "http://localhost:9000/api/v1/jobs",
+
+        }).then((res) => {
+            if (res.data.status === "success") {
+                dispatch(setJobState(res.data.data.jobs));
+                setJobs(res.data.data.jobs);
+            }
+        })
+
+    }, []);
+
+
+    const searchJob = (e) => {
+        const searchQuery = e.target.value.toLowerCase();
+        let results = []
+
+        if (searchQuery.length > 0) {
+            jobsState.jobs.filter((job) => {
+                let title = job.title.toLowerCase();
+
+                if (title.includes(searchQuery)) {
+                    results.push(job);
+                }
+            })
+
+            setJobs(results);
+        } else {
+            setJobs(jobsState.jobs);
+        }
+
+    }
+
     return (
-        <div className="jobs-page">
-            <div className="jobs-page-content">
+            <div className="jobs-page">
+                <div className="jobs-page-content">
 
-                <div className="top-bar">
-                    <h1>Find Jobs That Value Your Skills</h1>
-                    <p>Your experience matters. On KaziLink, employers are looking for workers with real-world skills and verified work histories—exactly like yours.</p>
+                    <div className="top-bar">
+                        <h1>Find Jobs That Value Your Skills</h1>
+                        <p>Your experience matters. On KaziLink, employers are looking for workers with real-world skills and verified work histories—exactly like yours.</p>
 
-                    <div className="input-area">
-                        <input type="text" name="" id="" placeholder="Search" />
+                        <div className="input-area">
+                            <input onInput={searchJob} type="text" name="" id="" placeholder="Search" />
+                        </div>
+                        <div className="tags">
+                            <button>Most Recent</button>
+                            <button>Most Applications</button>
+                            <button>Highest Pay</button>
+                            <button>Near Me</button>
+                            <button>Fulltime</button>
+                        </div>
                     </div>
-                    <div className="tags">
-                        <button>Most Recent</button>
-                        <button>Most Applications</button>
-                        <button>Highest Pay</button>
-                        <button>Near Me</button>
-                        <button>Fulltime</button>
+
+                    <div className="jobs-list">
+                        {
+                            jobs.map((item, index) => {
+                                return <Job key={index} data={item} />
+                            })
+                        }
                     </div>
-                </div>
-
-                <div className="jobs-list">
-
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
-                    <Job />
 
                 </div>
-
             </div>
-        </div>
     )
 }
 
 
-function Job() {
+function Job(props) {
+
+    const navigate = useNavigate();
+
+    const view = () => {
+        navigate(`/job-details/${props.data._id}`);
+    }
+
     return (
         <div className="job">
             <div className="image">
@@ -51,9 +95,9 @@ function Job() {
             </div>
             <div className="content">
                 <h3>Gig</h3>
-                <h1>Painting Job - Gisozi</h1>
-                <p>A painter is needed for a 3 day work in Gisozi</p>
-                <button>View Job</button>
+                <h1>{props.data.title}</h1>
+                <p>{props.data.description}</p>
+                <button onClick={view}>View Job</button>
             </div>
         </div>
     )

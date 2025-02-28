@@ -2,14 +2,20 @@ import Navbar from "./components/navbar"
 import Content from "./components/content";
 import CreateJob from "./pages/createJob/createJob";
 import Registration, { EmployersForm, WorkersForm } from "./forms/registration";
-import { createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createHashRouter, Outlet, RouterProvider, useNavigate } from "react-router-dom";
 import UsersDashboard from "./pages/users_dashboard";
 import EmployerDashboard from "./pages/employer_dashboard";
-import Login, { EmployerLogin, UserLogin } from "./forms/login";
+import Login from "./forms/login";
 import WorkersPage from "./pages/workers_page";
 import JobsPage from "./pages/jobs_page";
 import NotificationPage from "./pages/notification_page";
 import JobDetails from "./pages/job_details";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import {setUser, setAuthorized} from "./store/states/user.state"
+import WorkersDashboard from "./pages/workers_dashboard.jsx";
+
+// const userState = useSelector(store => store.userState);
 
 const router = createHashRouter([
     {
@@ -36,17 +42,7 @@ const router = createHashRouter([
             },
             {
                 path: "/login",
-                element: <Login />,
-                children: [
-                    {
-                        path: "/login",
-                        element: <UserLogin />
-                    },
-                    {
-                        path: "/login/employer",
-                        element: <EmployerLogin />
-                    }
-                ]
+                element: <Login />
             },
             {
                 path: "/create",
@@ -59,10 +55,15 @@ const router = createHashRouter([
             {
                 path: "/employer/dashboard",
                 element: <EmployerDashboard />
+            },,
+            {
+                path: "/workers/dashboard",
+                element: <WorkersDashboard />
             },
             {
                 path: "/workers",
                 element: <WorkersPage />
+                // element: userState.user.role == "employer" && <WorkersPage />
             },,
             {
                 path: "/jobs",
@@ -81,6 +82,25 @@ const router = createHashRouter([
 ])
 
 function Home() {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let user = localStorage.getItem("_kazi_user")
+
+        if (user == null) {
+            navigate("/")
+            localStorage.removeItem("_kazi_token")
+            localStorage.removeItem("_kazi_user")
+        } else {
+            user = JSON.parse(user)
+
+            dispatch(setUser(user));
+            dispatch(setAuthorized(true));
+        }
+    }, [])
+
     return (
         <div>
             <Navbar />

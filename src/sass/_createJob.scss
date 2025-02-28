@@ -31,6 +31,22 @@
         }
     }
 
+    .input-area {
+        gap: .5rem;
+        display: grid;
+        margin-top: 1rem;
+
+        select {
+            padding: 1rem;
+            color: #4A789C;
+            font-size: 1em;
+            outline: none;
+            background: #F7FAFC;
+            border-radius: .5rem;
+            border: 1px solid #cddfeb;
+        }
+    }
+
     .job-input{
         margin-top: 4rem;
         .title{
@@ -130,6 +146,8 @@
                 cursor: pointer;
             }
         }
+
+
 
     }
 

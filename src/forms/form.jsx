@@ -1,10 +1,12 @@
 import { pink } from "@mui/material/colors";
 import "./styles/form.scss";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef } from "react";
+import {setUser, setAuthorized} from "../store/states/user.state"
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Form() {
-    const inputRef = useRef();
     const genderRef = useRef();
     const firstNameRef = useRef();
     const secondNameRef = useRef();
@@ -16,7 +18,12 @@ export default function Form() {
     const password2Ref = useRef();
 
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const path = location.pathname;
     const [ skills , setSkills ] = useState([]);
+    const userState = useSelector(store => store.userState);
 
     const FilterSkills = (skillValue)=>{
         
@@ -24,6 +31,8 @@ export default function Form() {
           skills.includes(skillValue)
             ? setSkills(newArray)
             : setSkills([...skills, skillValue]);
+
+            console.log(newArray)
         
     }
     const handleSubmit = () => {
@@ -37,11 +46,13 @@ export default function Form() {
         const location = locationRef.current.value;
         const password = passwordRef.current.value;
         const password2 = password2Ref.current.value;
+        const role = path == "/register" ? "worker" : path == "/register/employer" ? "employer" : null
 
     
         axios
           .post(
-            "https://d4fc-105-179-6-194.ngrok-free.app/api/v1/users/signup",
+            // "https://d4fc-105-179-6-194.ngrok-free.app/api/v1/users/signup",
+            "http://localhost:9000/api/v1/users/signup",
             {
               Fname: firstName,
               Lname: secondName,
@@ -53,10 +64,23 @@ export default function Form() {
               location,
               password: password,
               passwordConfirm: password2,
-              skills
+              skills,
+              role
             }
           )
-          .then((result) => console.log(result))
+          .then((result) => {
+            dispatch(setUser(result.data.data))
+            dispatch(setAuthorized(true))
+            alert(result.data.message)
+            localStorage.setItem("_kazi_token", result.data.token)
+            localStorage.setItem("_kazi_user", JSON.stringify(result.data.data))
+
+            if (result.data.data.role == "worker") {
+              navigate("/jobs")
+            } else {
+              navigate("/workers")
+            }
+          })
           .catch((error) => console.log(error));
 
     }

@@ -1,4 +1,39 @@
+import Axios from "axios"
+import {useEffect, useState} from "react"
+import { setWorkersState, setActiveWorker } from "../store/states/workers.state.js";
+import { useDispatch } from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 export default function WorkersPage() {
+
+    const dispatch = useDispatch();
+    const [workers, setWorkers] = useState([])
+
+    useEffect(() => {
+        Axios({
+            method: "GET",
+            url: "http://localhost:9000/api/v1/users/workers",
+        }).then((response) => {
+            setWorkers(response.data.data)
+            dispatch(setWorkersState(response.data.data))
+        })
+    }, [dispatch]);
+
+    const search = (e) => {
+        let searchQuery = e.target.value.toLowerCase()
+        const results = []
+
+        workers.filter(worker => {
+            let workersName = worker.username.toLowerCase();
+            let workersSkills = worker.skills;
+
+            if (workersName.includes(searchQuery) || workersSkills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()))) {
+                setWorkers(results)
+                results.push(worker)
+            }
+        })
+    }
+
     return (
         <div className="workers-page">
 
@@ -8,7 +43,7 @@ export default function WorkersPage() {
                     <p>Discover reliable workers with proven skills and experience. KaziLink's verification system ensures you connect with qualified candidates for your specific needs.</p>
 
                     <div className="input-area">
-                        <input type="text" name="" id="" placeholder="Search by name or skill" />
+                        <input type="text" onInput={search} placeholder="Search by name or skill" />
                     </div>
                     <div className="tags">
                         <button>All Workers</button>
@@ -20,15 +55,11 @@ export default function WorkersPage() {
                 </div>
 
                 <div className="workers-list">
-                    
-                    <Worker />
-                    <Worker />
-                    <Worker />
-                    <Worker />
-                    <Worker />
-                    <Worker />
-                    <Worker />
-
+                    {
+                        workers.map((data, key) => {
+                            return <Worker key={key} data={data} />
+                        })
+                    }
                 </div>
             </div>
 
@@ -37,17 +68,31 @@ export default function WorkersPage() {
 }
 
 
-function Worker() {
+function Worker(props) {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const setActive = () => {
+        dispatch(setActiveWorker(props.data._id));
+        navigate("/workers/dashboard");
+    }
+
     return (
         <div className="worker">
-            <div className="profile"></div>
+            <div className="profile" style={{backgroundImage: `url('${props.data.profilePicture}')`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
             <div className="content">
                 <div>
-                    <h1>Claudine Uwimana</h1>
-                    <p>Cleaning, Cooking, Washing</p>
+                    <h1>{props.data.Fname} {props.data.Lname}</h1>
+                    <p>
+                        {props.data.skills.map((skill, index) => {
+                            return <span key={index}>{skill},</span>
+                        })}
+                    </p>
                 </div>
-                <button>View Profile</button>
+                <button onClick={setActive}>View Profile</button>
             </div>
         </div>
     )
 }
+
