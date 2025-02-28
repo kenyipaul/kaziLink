@@ -5,6 +5,7 @@ import { CiGlobe } from "react-icons/ci";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Content() {
 
     const navigate = useNavigate();
@@ -35,6 +36,9 @@ export default function Content() {
 						<p>{item.description}</p>
 					</div>
 				))}
+
+            
+
 			</div>
 		</div>
 	);
