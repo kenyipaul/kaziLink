@@ -81,3 +81,80 @@
         }
     }
 }
+.add_skill {
+    border: 2px dashed #7777;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 53px;
+    border-radius: 10px;
+    img {
+        width: 25px;
+    }
+}
+.create_skill {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: #3936361a;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    .input {
+        position: relative;
+        padding: 24px 10px 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        height: 100px;
+        display: flex
+    ;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        input {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #f6f6f6;
+            border: 1px solid #eee;
+            outline: none;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: #4caf50;
+            color: #fff;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+        img {
+            width: 17px;
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            top: 10px;
+        }
+    }
+}
+textarea {
+    padding: 1rem;
+    border: 1px solid #7777;
+    border-radius: 0.5rem;
+    overflow-y: auto;
+    outline: none;
+}
+.header-bar {
+    .save {
+        background-color: #4caf50 !important;
+        padding: 0.4rem 1rem;
+        border-radius: 0.4rem;
+        color: #fff;
+    }
+    .edit {
+
+    }
+}
