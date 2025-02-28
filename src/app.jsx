@@ -129,15 +129,13 @@ function Home() {
     return (
         <div>
 
-            {/*{*/}
-            {/*    userState.userData &&*/}
-            {/*    userState.userData.verifyNumber ?*/}
-            {/*        <></> :*/}
-            {/*    <div className={userState.userData.verifyNumber ? "notification-alert active" : "notification-alert active"}>*/}
-            {/*        <p>To gain full control over you account, please verify</p>*/}
-            {/*        <button onClick={() => navigate("/otp/verification")}>Verify</button>*/}
-            {/*    </div>*/}
-            {/*}*/}
+            {
+                userState.authorized == true && userState.userData.verifyNumber == false &&
+                <div className={userState.userData.verifyNumber ? "notification-alert active" : "notification-alert active"}>
+                    <p>To gain full control over you account, please verify</p>
+                    <button onClick={() => navigate("/otp/verification")}>Verify</button>
+                </div>
+            }
 
             <Navbar />
             <Outlet />
