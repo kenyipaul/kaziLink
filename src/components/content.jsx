@@ -4,11 +4,13 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import { CiGlobe } from "react-icons/ci";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 export default function Content() {
 
     const navigate = useNavigate();
+    const userState = useSelector((state) => state.userState);
     
 	return (
 		<div className="hero-container">
@@ -17,10 +19,20 @@ export default function Content() {
 					<h1>Verify Your Work. Open New Doors</h1>
 					<h2>Your skills deserve recognition.</h2>
 					<p>Every job builds experience. Every experience builds skill. KaziLink transforms your work history into a verified digital identity that employers trust. </p>
+
+                    {!userState.authorized ?
                     <div className="buttons">
-                        <button onClick={() => navigate("/register")}>Join as Worker</button>
-                        <button onClick={() => navigate("/register/employer")}>Join as Employer</button>
-                    </div>
+                        <button onClick={() => navigate("/register")}>Create account</button>
+                        <button onClick={() => navigate("/login")}>Log In</button>
+                    </div> :
+                        userState.userData.role === "worker" ?
+                        <div className="buttons">
+                            <button onClick={() => navigate("/jobs")}>Find a Job</button>
+                        </div> :
+                            <div className="buttons">
+                                <button onClick={() => navigate("/create")}>Post a Job</button>
+                            </div>
+                    }
                 </div>
 
 				<div className="left-content">
@@ -36,9 +48,6 @@ export default function Content() {
 						<p>{item.description}</p>
 					</div>
 				))}
-
-            
-
 			</div>
 		</div>
 	);

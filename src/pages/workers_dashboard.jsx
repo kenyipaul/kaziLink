@@ -1,15 +1,25 @@
 import { useSelector } from "react-redux"
+import {useState} from "react";
+import {Backdrop} from "@mui/material";
 
 export default function WorkersDashboard() {
 
-
+    const [currentPage, setCurrentPage] = useState(0);
+    const [reviewState, setReviewState] = useState(false);
     const userState = useSelector(store => store.userState)
 
     return (
         <div className="users-dashboard">
 
+            <div className="top-bar">
+                <button onClick={() => setCurrentPage(0)} className={currentPage === 0 && "active"}>Profile Info</button>
+                <button onClick={() => setCurrentPage(1)} className={currentPage === 1 && "active"}>Reviews</button>
+            </div>
+
             <div className="user-info-container">
 
+                {currentPage === 0 ?
+                <>
                 <section>
                     <div className="profile-image"></div>
                     <div className="user-info">
@@ -22,7 +32,6 @@ export default function WorkersDashboard() {
                         </div>
                     </div>
                 </section>
-
                 <section>
                     <div className="about-section section">
                         <h1>About Claudine</h1>
@@ -105,10 +114,64 @@ export default function WorkersDashboard() {
                     </div>
 
                 </section>
+                </>:
 
+                <section>
+
+                    <div className="review-section">
+                        <div className="nav-bar">
+                            <h1>Reviews</h1>
+                            <button onClick={() => setReviewState(true)}>Post a Review</button>
+                        </div>
+                        <Backdrop open={reviewState}>
+                            <div className="review-input-box">
+                                <div className="head">
+                                    <svg onClick={() => setReviewState(false)} width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#0F0F0F"></path> </g></svg>
+                                </div>
+                                <h1>Write a review</h1>
+                                <textarea placeholder="Write your review here..." name="" id="" cols="30" rows="10"></textarea>
+                                <button>Post Review</button>
+                            </div>
+                        </Backdrop>
+
+                        <div className="review-list">
+
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+                            <Review />
+
+                        </div>
+                    </div>
+
+
+                </section> }
 
             </div>
 
+        </div>
+    )
+}
+
+
+
+function Review() {
+    return (
+        <div className="review">
+            <div className="profile"></div>
+            <div className="info">
+                <h4>By John Doe</h4>
+                <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id incidunt nostrum placeat quidem repudiandae! Ab.</h5>
+                <p>12/12/12</p>
+            </div>
         </div>
     )
 }

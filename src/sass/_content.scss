@@ -7,6 +7,7 @@
 
     .contents {
         gap: 2rem;
+        margin: 2rem 0;
         display: flex;
         max-width: 511px;
         align-items: center;
@@ -39,9 +40,10 @@
                 button {
                     color: #fff;
                     border: none;
-                    padding: 1rem;
+                    font-size: 1em;
                     cursor: pointer;
-                    border-radius: .5rem;
+                    padding: 1rem 1.5rem;
+                    border-radius: .4rem;
                     background: none;
 
                     &:nth-child(1) { background: #0286EC; }
@@ -77,6 +79,7 @@
             margin: .5rem 0;
         }
         p{
+            color: #555;
             hyphens: auto;
         }
 

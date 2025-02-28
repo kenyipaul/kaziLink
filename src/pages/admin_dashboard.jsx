@@ -1,4 +1,4 @@
-import "../sass/admin_dashboard.scss"
+import "../sass/_admin_dashboard.scss"
 import React, { useContext, useState } from "react";
 import { Link, HashRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 
@@ -17,10 +17,8 @@ export default function AdminDashboard() {
     return (
         <div id="admin-dashboard">
             <SidebarContext.Provider value={[sidebarState, setSidebarState]}> 
-                <Router>
-                    <Sidebar />
-                    <Main />
-                </Router>
+                <Sidebar />
+                <Main />
             </SidebarContext.Provider>
         </div>
     )
@@ -51,11 +49,11 @@ function Sidebar() {
                 </div>
 
                 <div className="links">
-                    <Link className={path == "/" && "active"} to="/"><p>Dashboard</p></Link>
-                    <Link className={path == "/posts" && "active"} to="/posts"><p>Posts</p></Link>
-                    <Link className={path == "/employers" && "active"} to="/employers"><p>Employers</p></Link>
-                    <Link className={path == "/employees" && "active"} to="/employees"><p>Employees</p></Link>
-                    <Link className={path == "/feedback" && "active"} to="/feedback"><p>Feedback</p></Link>
+                    <Link className={path === "/" && "active"} to="/"><p>Dashboard</p></Link>
+                    <Link className={path === "/posts" && "active"} to="/posts"><p>Posts</p></Link>
+                    <Link className={path === "/employers" && "active"} to="/employers"><p>Employers</p></Link>
+                    <Link className={path === "/employees" && "active"} to="/employees"><p>Employees</p></Link>
+                    <Link className={path === "/feedback" && "active"} to="/feedback"><p>Feedback</p></Link>
                 </div>
             </section>
 

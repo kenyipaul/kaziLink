@@ -6,6 +6,8 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 export default function landing() {
 
 	const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
     const userState = useSelector(store => store.userState);
 
     const [menuState, setMenuState] = useState(false);
@@ -21,7 +23,11 @@ export default function landing() {
 					className="logo"
 				/>
                 {userState.authorized ? <AuthorizedNav active={menuState} /> : <UnauthorizedNav /> }
-                <svg onClick={() => setMenuState(!menuState)} className="menuBtn" width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Menu_Alt_01"> <path id="Vector" d="M12 17H19M5 12H19M5 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+
+                {path !== "/login" &&
+                    <>
+                        <svg onClick={() => setMenuState(!menuState)} className="menuBtn" width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Menu_Alt_01"> <path id="Vector" d="M12 17H19M5 12H19M5 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
+                    </> }
 			</div>
 		</div>
 	);
@@ -36,7 +42,7 @@ function UnauthorizedNav() {
 
     return (
         <>
-            {path == "/register" && (
+            {path === "/register" && (
                 <div className="navbar-buttons">
                     <button onClick={() => navigate("/login")}>
                         Login
@@ -47,7 +53,7 @@ function UnauthorizedNav() {
                 </div>
             )}
 
-            {path == "/register/employer" && (
+            {path === "/register/employer" && (
                 <div className="navbar-buttons">
                     <button onClick={() => navigate("/login")}>
                         Login
@@ -58,21 +64,18 @@ function UnauthorizedNav() {
                 </div>
             )}
 
-            {path == "/login" && (
-                <div className="navbar-buttons">
-                    <button onClick={() => navigate("/login/employer")}>
-                        Login as Worker
-                    </button>
-                    <button onClick={() => navigate("/register")}>Register</button>
-                </div>
-            )}
+            {/*{path === "/login" && (*/}
+            {/*    <div className="navbar-buttons">*/}
+            {/*        <button onClick={() => navigate("/login/employer")}>*/}
+            {/*            Login as Worker*/}
+            {/*        </button>*/}
+            {/*        <button onClick={() => navigate("/register")}>Register</button>*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
-            {path == "/login/employer" && (
+            {path === "/login" && (
                 <div className="navbar-buttons">
-                    <button onClick={() => navigate("/login")}>
-                        Login as Employer
-                    </button>
-                    <button onClick={() => navigate("/register")}>Register</button>
+                    <button onClick={() => navigate("/register")}>Join KaziLink</button>
                 </div>
             )}
         </>

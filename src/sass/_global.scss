@@ -1,0 +1,23 @@
+@font-face {
+    font-family: poppins-regular;
+    src: url("/assets/fonts/Poppins-Regular.ttf")
+}
+
+@font-face {
+    font-family: poppins-bold;
+    src: url("/assets/fonts/Poppins-Bold.ttf")
+}
+
+$primary-font: poppins-regular;
+$secondary-font: poppins-bold;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $primary-font, sans-serif;
+}
+
+body {
+    height: 100vh;
+}

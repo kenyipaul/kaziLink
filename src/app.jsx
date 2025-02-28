@@ -15,10 +15,28 @@ import { useEffect } from "react";
 import {setUser, setAuthorized} from "./store/states/user.state"
 import WorkersDashboard from "./pages/workers_dashboard.jsx";
 import OTPForm from "./forms/modules/otp_form.jsx";
+import AdminDashboard from "./pages/admin_dashboard.jsx";
+
+import Posts from "./pages/views/posts.jsx";
+import Dashboard from "./pages/views/dashboard.jsx";
 
 // const userState = useSelector(store => store.userState);
 
 const router = createHashRouter([
+    {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
+        children: [
+            {
+                path: "/admin/dashboard",
+                element: <Dashboard />
+            },
+            {
+                path: "/admin/dashboard/jobs",
+                element: <Posts />
+            }
+        ]
+    },
     {
         path: "/",
         element: <Home />,
@@ -56,7 +74,7 @@ const router = createHashRouter([
             {
                 path: "/employer/dashboard",
                 element: <EmployerDashboard />
-            },,
+            },
             {
                 path: "/workers/dashboard",
                 element: <WorkersDashboard />
@@ -64,8 +82,7 @@ const router = createHashRouter([
             {
                 path: "/workers",
                 element: <WorkersPage />
-                // element: userState.user.role == "employer" && <WorkersPage />
-            },,
+            },
             {
                 path: "/jobs",
                 element: <JobsPage />
@@ -112,15 +129,15 @@ function Home() {
     return (
         <div>
 
-            {
-                userState.userData &&
-                userState.userData.verifyNumber ?
-                    <></> :
-                <div className={userState.userData.verifyNumber ? "notification-alert active" : "notification-alert active"}>
-                    <p>To gain full control over you account, please verify</p>
-                    <button onClick={() => navigate("/otp/verification")}>Verify</button>
-                </div>
-            }
+            {/*{*/}
+            {/*    userState.userData &&*/}
+            {/*    userState.userData.verifyNumber ?*/}
+            {/*        <></> :*/}
+            {/*    <div className={userState.userData.verifyNumber ? "notification-alert active" : "notification-alert active"}>*/}
+            {/*        <p>To gain full control over you account, please verify</p>*/}
+            {/*        <button onClick={() => navigate("/otp/verification")}>Verify</button>*/}
+            {/*    </div>*/}
+            {/*}*/}
 
             <Navbar />
             <Outlet />

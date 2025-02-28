@@ -1,5 +1,28 @@
 .users-dashboard {
 
+    .top-bar {
+        gap: 1rem;
+        display: flex;
+        padding: 1rem;
+        margin: 0 auto;
+        max-width: 900px;
+        align-items: center;
+
+        button {
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            background: none;
+
+            &.active {
+                color: #0286EC;
+                font-weight: 600;
+                border-bottom: 0.2rem solid #0286EC;
+            }
+        }
+    }
+
     .user-info-container {
         padding: 1.5rem;
         max-width: 900px;
@@ -76,11 +99,52 @@
                 padding: 1rem;
                 border: 1px solid #ddd;
 
-                .top-bar {
+                .about-writer {
+                    gap: 1rem;
+                    width: 100%;
+                    padding: 2rem;
+                    display: grid;
+                    background: #fff;
+                    max-width: 500px;
+                    border-radius: 1rem;
+
+                    .head {
+                        display: flex;
+                        justify-content: flex-end;
+
+                        svg {
+                            cursor: pointer;
+                        }
+                    }
+
+                    textarea {
+                        padding: 1rem;
+                        font-size: 1rem;
+                        min-height: 100px;
+                        max-height: 150px;
+                        resize: vertical;
+                        outline: none;
+                        border-radius: 1rem;
+                        border: 1px solid #ddd;
+                    }
+
+                    button {
+                        color: #fff;
+                        border: none;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        width: fit-content;
+                        background: #0286EC;
+                        padding: 1rem 1.5rem;
+                        border-radius: 0.5rem;
+                    }
+                }
+
+                .header-bar {
                     display: flex;
                     padding: 0 0 1rem 0;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: space-between !important;
                     border-bottom: 1px solid #ddd;
 
                     h1 {
@@ -235,6 +299,102 @@
                 }
             }
 
+
+        }
+
+
+        .review-section {
+            .nav-bar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                button {
+                    border: none;
+                    font-size: .9em;
+                    cursor: pointer;
+                    border-radius: .5rem;
+                    padding: .8rem 1.3rem;
+                }
+            }
+
+            .review-list {
+                gap: 2rem;
+                display: grid;
+                margin-top: 2rem;
+            }
+
+            .review {
+                gap: 1rem;
+                display: flex;
+
+                .profile {
+                    height: 3rem;
+                    min-width: 3rem;
+                    border-radius: 50%;
+                    background: #ff0053;
+                }
+
+                .info {
+
+
+                    h5 {
+                        color: #555;
+                        font-size: 1.1em;
+                        font-weight: 500;
+                    }
+
+                    p {
+                        color: #555;
+                        margin-top: 1rem;
+                    }
+                }
+            }
+
+
+            .review-input-box {
+                gap: .5rem;
+                width: 100%;
+                padding: 2rem;
+                display: grid;
+                max-width: 500px;
+                background: #fff;
+                border-radius: 1rem;
+
+                .head {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    svg {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        cursor: pointer;
+                    }
+                }
+
+                textarea {
+                    padding: 1rem;
+                    height: 150px;
+                    outline: none;
+                    font-size: 1rem;
+                    resize: vertical;
+                    max-height: 200px;
+                    min-height: 100px;
+                    border-radius: .7rem;
+                    border: 1px solid #ddd;
+                }
+
+                button {
+                    color: #fff;
+                    border: none;
+                    font-size: 1em;
+                    width: fit-content;
+                    background: #0286EC;
+                    padding: 1rem 1.5rem;
+                    border-radius: 0.5rem;
+                }
+
+            }
         }
 
     }

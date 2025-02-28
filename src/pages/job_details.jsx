@@ -79,10 +79,6 @@ export default function JobDetails() {
                             <h3>{jobDetails.location}</h3>
                         </div>
                         <div className="detail">
-                            <p>Duration</p>
-                            <h3>8 hours per day</h3>
-                        </div>
-                        <div className="detail">
                             <p>End Date</p>
                             <h3>{new Date(jobDetails.endDate).toLocaleDateString()}</h3>
                         </div>
