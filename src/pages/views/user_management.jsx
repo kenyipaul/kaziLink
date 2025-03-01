@@ -49,7 +49,7 @@ function Workers() {
     useEffect(() => {
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/users/workers",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
 
         }).then((res) => {
             setWorkers(res.data.data);
@@ -72,7 +72,7 @@ function Employers() {
     useEffect(() => {
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/users/employees",
+            url: "https://kazilink.onrender.com/api/v1/users/employees",
 
         }).then((res) => {
             setEmployers(res.data.data);
@@ -99,7 +99,7 @@ function User(props) {
         if (confirm("Are you sure you want to delete this user?")) {
             Axios({
                 method: "delete",
-                url: `http://localhost:9000/api/v1/users/${props.data._id}`,
+                url: `https://kazilink.onrender.com/api/v1/users/${props.data._id}`,
             }).then((res) => {
                 if (res.data.status === "success") {
                     alert(res.data.message)

@@ -20,7 +20,7 @@ export default function OTPForm() {
         token,
       };
       const resoponse = await axios.post(
-        `http://localhost:9000/api/v1/sms/send-otp`,
+        `https://kazilink.onrender.com/api/v1/sms/send-otp`,
         ob
       );
       if (resoponse.statusText === "OK") {
@@ -38,7 +38,7 @@ export default function OTPForm() {
         token,
       };
       const resoponse = await axios.post(
-        `http://localhost:9000/api/v1/sms/verify-otp`,
+        `https://kazilink.onrender.com/api/v1/sms/verify-otp`,
         ob
       );
       if (resoponse.data.message === "The OTP is Valid") {
@@ -62,7 +62,7 @@ export default function OTPForm() {
       token,
     };
     const resoponse = await axios.post(
-      `http://localhost:9000/api/v1/sms/send-otp`,
+      `https://kazilink.onrender.com/api/v1/sms/send-otp`,
       ob
     );
     if (resoponse.statusText === "OK") {

@@ -36,7 +36,7 @@ export default function CreateJob() {
 		} else {
 			Axios({
 				method: "POST",
-				url: "http://localhost:9000/api/v1/jobs",
+				url: "https://kazilink.onrender.com/api/v1/jobs",
 				data: {
 					title, payment, endDate, startDate, location, description, type, token
 				}

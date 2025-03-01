@@ -16,7 +16,7 @@ export default function Verifications() {
     useEffect(() => {
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/users/workers",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
 
         }).then((res) => {
             setWorkers(res.data.data);

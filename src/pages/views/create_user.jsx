@@ -33,7 +33,7 @@ export default function CreateUser() {
         if (password === password2) {
             axios
                 .post(
-                    "http://localhost:9000/api/v1/users/signup",
+                    "https://kazilink.onrender.com/api/v1/users/signup",
                     {
                         Fname: firstName,
                         Lname: secondName,
@@ -96,8 +96,11 @@ export default function CreateUser() {
                         <div className="input-area">
                             <label htmlFor="location">Location</label>
                             <select id="location" ref={locationRef}>
-                                <option value="kigali">Gisozi</option>
-                                <option value="kigali">K</option>
+                                <option value="Kigali">Kigali</option>
+                                <option value="Gisozi">Gisozi</option>
+                                <option value="Nyamirambo">Nyamirambo</option>
+                                <option value="Kismenti">Kismenti</option>
+                                <option value="Kimironko">Kimironko</option>
                             </select>
                         </div>
                         <div className="input-area">

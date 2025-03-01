@@ -19,7 +19,7 @@ export default function Login() {
 
         Axios({
             method: 'POST',
-            url: "http://localhost:9000/api/v1/users/login",
+            url: "https://kazilink.onrender.com/api/v1/users/login",
             data: { password, phone: `+250${phone}` }
         }).then((response) => {
             if (response.data.success === "success") {

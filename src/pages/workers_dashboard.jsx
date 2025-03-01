@@ -23,7 +23,7 @@ export default function WorkersDashboard() {
         createdAt: new Date().toLocaleString(),
       };
       const response = await axios.post(
-        `http://localhost:9000/api/v1/users/${worker._id}`,
+        `https://kazilink.onrender.com/api/v1/users/${worker._id}`,
         { feedback: [...worker.feedback, ob] }
       );
       setReviewState(false);
@@ -36,7 +36,7 @@ export default function WorkersDashboard() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:9000/api/v1/users/workers").then((response) => {
+    axios.get("https://kazilink.onrender.com/api/v1/users/workers").then((response) => {
       const workers = response.data.data;
       const worker = workers.find((worker) => worker._id === id);
       setWorker(worker);

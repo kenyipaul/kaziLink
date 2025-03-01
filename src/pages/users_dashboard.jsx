@@ -34,7 +34,7 @@ export default function UsersDashboard() {
   const HandleAddSkill = async () => {
     setShowAddSkill(false);
     const response = await axios.post(
-      `http://localhost:9000/api/v1/users/update`,
+      `https://kazilink.onrender.com/api/v1/users/update`,
       {
         skills: [...userState.userData.skills, skill],
         token,
@@ -51,7 +51,7 @@ export default function UsersDashboard() {
     if(value.trim().length > 0){
 
         const response = await axios.post(
-            `http://localhost:9000/api/v1/users/update`,
+            `https://kazilink.onrender.com/api/v1/users/update`,
             {
         values: [...userState.userData.values, value],
         token,
@@ -69,7 +69,7 @@ export default function UsersDashboard() {
   const HandleAddAboutValues = async () => {
     setEditAbout(false);
     const response = await axios.post(
-      `http://localhost:9000/api/v1/users/update`,
+      `https://kazilink.onrender.com/api/v1/users/update`,
       {
         about:aboutValue ,
         token,

@@ -13,7 +13,7 @@ export default function Dashboard() {
 
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/users/employees",
+            url: "https://kazilink.onrender.com/api/v1/users/employees",
 
         }).then((res) => {
             setEmployers(res.data.data);
@@ -21,7 +21,7 @@ export default function Dashboard() {
 
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/users/workers",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
 
         }).then((res) => {
             setWorkers(res.data.data);
@@ -30,7 +30,7 @@ export default function Dashboard() {
 
         Axios({
             method: "get",
-            url: "http://localhost:9000/api/v1/jobs",
+            url: "https://kazilink.onrender.com/api/v1/jobs",
 
         }).then((res) => {
             if (res.data.status === "success") {

@@ -15,7 +15,7 @@ export default function WorkersPage() {
   useEffect(() => {
     Axios({
       method: "GET",
-      url: "http://localhost:9000/api/v1/users/workers",
+      url: "https://kazilink.onrender.com/api/v1/users/workers",
     }).then((response) => {
       setWorkers(response.data.data);
       setWorkersAray(response.data.data);
