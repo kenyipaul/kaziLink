@@ -9,12 +9,16 @@ import axios from "axios";
 export default function UsersDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+
   const userState = useSelector((store) => store.userState);
 
   const [editAbout, setEditAbout] = useState(false);
   const [verify, setVerify] = useState(false);
   const [skill, setSkill] = useState("");
   const [value, setValue] = useState("");
+  const [images, setImages] = useState(userState.userData.images || []);
+
   const [aboutValue, setAboutValue] = useState(
     userState.userData.about ? userState.userData.about : ""
   );
@@ -48,36 +52,62 @@ export default function UsersDashboard() {
   };
   const HandleAddValues = async () => {
     setShowAddValues(false);
-    if(value.trim().length > 0){
-
-        const response = await axios.post(
-            `http://localhost:9000/api/v1/users/update`,
-            {
-        values: [...userState.userData.values, value],
-        token,
-      }
-    );
-    if (response.data) {
+    if (value.trim().length > 0) {
+      const response = await axios.post(
+        `http://localhost:9000/api/v1/users/update`,
+        {
+          values: [...userState.userData.values, value],
+          token,
+        }
+      );
+      if (response.data) {
         dispatch(setUser(response.data.data));
         localStorage.setItem("_kazi_user", JSON.stringify(response.data.data));
+      }
+      setValue("");
+    } else {
+      alert("Please Provide a valid Value");
     }
-    setValue("");
-} else {
-    alert("Please Provide a valid Value")
-}
   };
   const HandleAddAboutValues = async () => {
     setEditAbout(false);
     const response = await axios.post(
       `http://localhost:9000/api/v1/users/update`,
       {
-        about:aboutValue ,
+        about: aboutValue,
         token,
       }
     );
     if (response.data) {
       dispatch(setUser(response.data.data));
       localStorage.setItem("_kazi_user", JSON.stringify(response.data.data));
+    }
+  };
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const HandleSendImage = async () => {
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
+    const id = userState.userData._id;
+    console.log(id);
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(
+      `http://localhost:9000/api/v1/upload/${id}`,
+      formData
+    );
+    if (response.data.status === "success") {
+      setImages([...userState.userData.images, response.data.data.uniqueName]);
+      const newUser = await axios.post(
+        `http://localhost:9000/api/v1/users/update`,
+        { images: [...images, response.data.data.uniqueName], token }
+      );
+      dispatch(setUser(newUser.data.data));
+      localStorage.setItem("_kazi_user", JSON.stringify(newUser.data.data));
     }
   };
   return (
@@ -345,6 +375,28 @@ export default function UsersDashboard() {
                                 <p>Claudine transformed our home with her attention to detail. She's reliable and trustworthy.</p>
                                 <h4>Sarah, Former Employer</h4>
                             </div> */}
+            </div>
+          </div>
+
+                     
+          <div className="gallery">
+            <h1>Gallery</h1>
+            <div className="add_image">
+              <input type="file" name="" id="" onChange={handleFileChange} />
+              <label onClick={() => HandleSendImage()}>upload</label>
+            </div>
+            <div className="gallery-history">
+              {userState.userData.images &&
+                userState.userData.images.map((image, key) => {
+                  return (
+                    <div className="image" key={key}>
+                      <img
+                        src={`http://localhost:9000/images/${userState.userData._id}/${image}`}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </section>

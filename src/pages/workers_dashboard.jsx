@@ -27,8 +27,8 @@ export default function WorkersDashboard() {
         { feedback: [...worker.feedback, ob] }
       );
       setReviewState(false);
-      console.log( response.data.data)
-      setWorker( response.data.data)
+      console.log(response.data.data);
+      setWorker(response.data.data);
       setFeedbackContent("");
     } else {
       alert("Please Provide a Valid Feedback");
@@ -205,6 +205,7 @@ export default function WorkersDashboard() {
                             </div> */}
                 </div>
               </div>
+    
             </section>
           </>
         ) : (

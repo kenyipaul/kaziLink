@@ -13,8 +13,8 @@ export default function EmployerDashboard() {
   const [jobs, setJobs] = useState([]);
   const [bioWriter, setBioWriter] = useState(false);
   const userState = useSelector((store) => store.userState);
-  const [images, setImages] = useState(userState.userData.images || []);
-  const [file, setFile] = useState(null);
+  // const [images, setImages] = useState(userState.userData.images || []);
+  // const [file, setFile] = useState(null);
   const token = localStorage.getItem("_kazi_token");
 
   const [aboutValue, setAboutValue] = useState(
@@ -43,33 +43,33 @@ export default function EmployerDashboard() {
     }
   };
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  // const handleFileChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
-  const HandleSendImage = async () => {
-    if (!file) {
-      alert("Please select a file.");
-      return;
-    }
-    const id = userState.userData._id;
-    console.log(id);
-    const formData = new FormData();
-    formData.append("file", file);
-    const response = await axios.post(
-      `http://localhost:9000/api/v1/upload/${id}`,
-      formData
-    );
-    if (response.data.status === "success") {
-      setImages([...userState.userData.images, response.data.data.uniqueName]);
-      const newUser = await axios.post(
-        `http://localhost:9000/api/v1/users/update`,
-        { images: [...images, response.data.data.uniqueName], token }
-      );
-      dispatch(setUser(newUser.data.data));
-      localStorage.setItem("_kazi_user", JSON.stringify(newUser.data.data));
-    }
-  };
+  // const HandleSendImage = async () => {
+  //   if (!file) {
+  //     alert("Please select a file.");
+  //     return;
+  //   }
+  //   const id = userState.userData._id;
+  //   console.log(id);
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   const response = await axios.post(
+  //     `http://localhost:9000/api/v1/upload/${id}`,
+  //     formData
+  //   );
+  //   if (response.data.status === "success") {
+  //     setImages([...userState.userData.images, response.data.data.uniqueName]);
+  //     const newUser = await axios.post(
+  //       `http://localhost:9000/api/v1/users/update`,
+  //       { images: [...images, response.data.data.uniqueName], token }
+  //     );
+  //     dispatch(setUser(newUser.data.data));
+  //     localStorage.setItem("_kazi_user", JSON.stringify(newUser.data.data));
+  //   }
+  // };
   useEffect(() => {
     Axios({
       method: "get",
@@ -80,12 +80,11 @@ export default function EmployerDashboard() {
         let userId = userState.userData._id;
         let results = [];
 
-        jobs.filter((data) => {
-          if (data.createdBy === userId) {
-            results.push(data);
+        jobs.filter(async (data) => {
+          if (data.createdBy.id === userId) {
+            await results.push(data);
           }
         });
-
         setJobs(results);
       }
     });
@@ -257,7 +256,7 @@ export default function EmployerDashboard() {
               {/*</div>*/}
             </div>
           </div>
-
+          {/* 
           <div className="gallery">
             <h1>Gallery</h1>
             <div className="add_image">
@@ -277,7 +276,7 @@ export default function EmployerDashboard() {
                   );
                 })}
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
     </div>
