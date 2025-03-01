@@ -105,7 +105,7 @@ const router = createHashRouter([
                 element: <EmployerDashboard />
             },
             {
-                path: "/workers/dashboard",
+                path: "/workers/dashboard/:id",
                 element: <WorkersDashboard />
             },
             {
@@ -128,10 +128,10 @@ const router = createHashRouter([
                 path: "/otp/verification",
                 element: <OTPForm />
             },
-            {
-                path: "/chat",
-                element: <Chat />
-            }
+            // {
+            //     path: "/chat",
+            //     element: <Chat />
+            // }
         ]
     }
 ])

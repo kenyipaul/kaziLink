@@ -65,7 +65,7 @@ export default function JobsPage() {
               placeholder="Search"
             />
           </div>
-          <div className="tags">
+          {/* <div className="tags">
             <button
               onClick={() => setFilter(0)}
               className={filter === 0 && "active"}
@@ -96,7 +96,7 @@ export default function JobsPage() {
             >
               Full time
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="jobs-list">

@@ -1,11 +1,47 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Backdrop } from "@mui/material";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { setUser } from "../store/states/user.state";
+import { useDispatch } from "react-redux";
 
 export default function WorkersDashboard() {
   const [currentPage, setCurrentPage] = useState(0);
   const [reviewState, setReviewState] = useState(false);
-  const userState = useSelector((store) => store.userState);
+  const [worker, setWorker] = useState([]);
+  const [feedbackContent, setFeedbackContent] = useState("");
+  const [reviewArray, setReviewArray] = useState([]);
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+
+  const HandleReview = async () => {
+    if (feedbackContent.trim().length > 0) {
+      const ob = {
+        name: `${worker.Fname} ${worker.Lname}`,
+        content: feedbackContent,
+        createdAt: new Date().toLocaleString(),
+      };
+      const response = await axios.post(
+        `http://localhost:9000/api/v1/users/${worker._id}`,
+        { feedback: [...worker.feedback, ob] }
+      );
+      setReviewState(false);
+      console.log( response.data.data)
+      setWorker( response.data.data)
+      setFeedbackContent("");
+    } else {
+      alert("Please Provide a Valid Feedback");
+    }
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:9000/api/v1/users/workers").then((response) => {
+      const workers = response.data.data;
+      const worker = workers.find((worker) => worker._id === id);
+      setWorker(worker);
+    });
+  }, []);
 
   return (
     <div className="users-dashboard">
@@ -31,12 +67,11 @@ export default function WorkersDashboard() {
               <div className="profile-image"></div>
               <div className="user-info">
                 <h1>
-                  {userState.userData.Fname} {userState.userData.Lname}, 26
+                  {worker.Fname} {worker.Lname}, 26
                 </h1>
-                <h4>{userState.userData.email}</h4>
+                <h4>{worker.email}</h4>
                 <h4>
-                  User Since:{" "}
-                  {new Date(userState.userData.createdAt).toLocaleDateString()}
+                  User Since: {new Date(worker.createdAt).toLocaleDateString()}
                 </h4>
                 <div className="reports">
                   <h3>
@@ -97,14 +132,14 @@ export default function WorkersDashboard() {
             <section>
               <div className="about-section section">
                 <h1>About Claudine</h1>
-                <p>Not Set.</p>
+                <p>{worker.about ? worker.about : "Not Set."}</p>
               </div>
 
               <div className="skill-section section">
                 <h1>Skills</h1>
                 <div className="skill-grid">
-                  {Object.values(userState.userData).length > 0 &&
-                    userState.userData.skills.map((data, key) => {
+                  {worker.skills?.length > 0 &&
+                    worker.skills.map((data, key) => {
                       return <p key={key}>{data}</p>;
                     })}
                 </div>
@@ -113,9 +148,10 @@ export default function WorkersDashboard() {
               <div className="skill-section section">
                 <h1>Values</h1>
                 <div className="skill-grid">
-                  <p>Honesty</p>
-                  <p>Good Communicator</p>
-                  <p>God Fearing</p>
+                  {worker.values?.length > 0 &&
+                    worker.values.map((data, key) => {
+                      return <p key={key}>{data}</p>;
+                    })}
                 </div>
               </div>
 
@@ -213,24 +249,17 @@ export default function WorkersDashboard() {
                     id=""
                     cols="30"
                     rows="10"
+                    value={feedbackContent}
+                    onChange={(e) => setFeedbackContent(e.target.value)}
                   ></textarea>
-                  <button>Post Review</button>
+                  <button onClick={() => HandleReview()}>Post Review</button>
                 </div>
               </Backdrop>
 
               <div className="review-list">
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
+                {worker.feedback.map((data, key) => {
+                  return <Review key={key} data={data} />;
+                })}
               </div>
             </div>
           </section>
@@ -240,17 +269,15 @@ export default function WorkersDashboard() {
   );
 }
 
-function Review() {
+function Review({ data }) {
+  console.log(data);
   return (
     <div className="review">
       <div className="profile"></div>
       <div className="info">
-        <h4>By John Doe</h4>
-        <h5>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id incidunt
-          nostrum placeat quidem repudiandae! Ab.
-        </h5>
-        <p>12/12/12</p>
+        <h4>By {data.name}</h4>
+        <h5>{data.content}</h5>
+        <p>{data.createdAt}</p>
       </div>
     </div>
   );
