@@ -1,16 +1,45 @@
 import "../sass/navbar.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
-export default function landing() {
+export default function Landing() {
   const navigate = useNavigate();
   const userState = useSelector((store) => store.userState);
-
   const [menuState, setMenuState] = useState(false);
+
+
+  // useEffect(() => {
+  //   const googleTranslateScript = document.createElement('script');
+  //   googleTranslateScript.type = 'text/javascript';
+  //   googleTranslateScript.src =
+  //       'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  //   document.body.appendChild(googleTranslateScript);
+  //
+  //   window.googleTranslateElementInit = () => {
+  //     new window.google.translate.TranslateElement(
+  //         {
+  //           pageLanguage: 'auto',
+  //           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+  //           autoDisplay: false,
+  //           includedLanguages: 'en,fr,rw', // You can specify languages here
+  //         },
+  //         'google_translate_element'
+  //     );
+  //   };
+  //
+  //   return () => {
+  //     // Cleanup: Remove the script and the global function when the component unmounts
+  //     document.body.removeChild(googleTranslateScript);
+  //     delete window.googleTranslateElementInit;
+  //   };
+  // }, []);
 
   return (
     <div className="navbar">
+      <div id="google_translate_element">
+
+      </div>
       <div className="navbar-container">
         <img
           width="150px"
