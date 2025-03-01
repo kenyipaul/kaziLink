@@ -13,6 +13,8 @@ export default function EmployerDashboard() {
   const [jobs, setJobs] = useState([]);
   const [bioWriter, setBioWriter] = useState(false);
   const userState = useSelector((store) => store.userState);
+  const [images, setImages] = useState(userState.userData.images || []);
+  const [file, setFile] = useState(null);
   const token = localStorage.getItem("_kazi_token");
 
   const [aboutValue, setAboutValue] = useState(
@@ -39,7 +41,34 @@ export default function EmployerDashboard() {
       dispatch(setUser(response.data.data));
       localStorage.setItem("_kazi_user", JSON.stringify(response.data.data));
     }
-    console.log(aboutValue);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const HandleSendImage = async () => {
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
+    const id = userState.userData._id;
+    console.log(id);
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(
+      `http://localhost:9000/api/v1/upload/${id}`,
+      formData
+    );
+    if (response.data.status === "success") {
+      setImages([...userState.userData.images, response.data.data.uniqueName]);
+      const newUser = await axios.post(
+        `http://localhost:9000/api/v1/users/update`,
+        { images: [...images, response.data.data.uniqueName], token }
+      );
+      dispatch(setUser(newUser.data.data));
+      localStorage.setItem("_kazi_user", JSON.stringify(newUser.data.data));
+    }
   };
   useEffect(() => {
     Axios({
@@ -226,6 +255,27 @@ export default function EmployerDashboard() {
               {/*    <p>I maintain gardens at Mrs. Hellen’s pproperties. The work schedule is reliable and the management respects my expertise. Payment comes on the 5th of every month without fail. They could improve by providing better tools, but overall a good company to work with</p>*/}
               {/*    <h4>Sarah, Verified Worker</h4>*/}
               {/*</div>*/}
+            </div>
+          </div>
+
+          <div className="gallery">
+            <h1>Gallery</h1>
+            <div className="add_image">
+              <input type="file" name="" id="" onChange={handleFileChange} />
+              <label onClick={() => HandleSendImage()}>upload</label>
+            </div>
+            <div className="gallery-history">
+              {userState.userData.images &&
+                userState.userData.images.map((image, key) => {
+                  return (
+                    <div className="image" key={key}>
+                      <img
+                        src={`http://localhost:9000/images/${userState.userData._id}/${image}`}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </section>

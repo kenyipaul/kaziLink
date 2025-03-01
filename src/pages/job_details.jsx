@@ -14,18 +14,8 @@ export default function JobDetails() {
   const [jobDetails, setJobDetails] = useState({});
   const jobsState = useSelector((state) => state.jobsState);
   const userState = useSelector((state) => state.userState);
+  const [hire, setHire] = useState(null);
   const [workers, setWorkers] = useState([]);
-
-  useEffect(() => {
-    let activeJob = sessionStorage.getItem("active_job");
-
-    if (activeJob == null) {
-      navigate("/jobs");
-    } else {
-      activeJob = JSON.parse(activeJob);
-      setJobDetails(activeJob);
-    }
-  }, [location]);
 
   const apply = () => {
     Axios({
@@ -51,10 +41,40 @@ export default function JobDetails() {
           jobDetails.workers?.includes(worker._id)
         );
         setWorkers(neworkers);
+        neworkers.map((worker) => {
+          if (!hire) {
+            worker.jobs.map((job) => {
+              if (!hire) {
+                if (job._id === jobDetails._id) {
+                  setHire(worker._id);
+                  console.log(job._id);
+                  console.log("the same");
+                  return;
+                }
+              }
+            });
+          }
+        });
       });
     setCurrentTab(1);
   };
-  console.log(workers);
+  const HireHim = async (data) => {
+    const response = await axios.post(
+      `http://localhost:9000/api/v1/users/${data._id}`,
+      { jobs: [...data.jobs, jobDetails] }
+    );
+    setHire(data._id);
+  };
+  useEffect(() => {
+    let activeJob = sessionStorage.getItem("active_job");
+
+    if (activeJob == null) {
+      navigate("/jobs");
+    } else {
+      activeJob = JSON.parse(activeJob);
+      setJobDetails(activeJob);
+    }
+  }, [location]);
 
   return (
     <div className="job-details-page">
@@ -114,7 +134,7 @@ export default function JobDetails() {
                 <h3>{new Date(jobDetails.endDate).toLocaleDateString()}</h3>
               </div>
             </div>
-            {userState.userData.role === "worker" && (
+            {userState.userData.role === "worker" ? (
               <>
                 {jobDetails.workers &&
                 jobDetails.workers.includes(userState.userData._id) ? (
@@ -125,6 +145,14 @@ export default function JobDetails() {
                   <button onClick={apply}>Apply Now</button>
                 )}
               </>
+            ) : (
+              <button
+                style={{
+                  backgroundColor: "#4CAF50",
+                }}
+              >
+                Make as Complete
+              </button>
             )}
           </div>
         ) : (
@@ -133,7 +161,15 @@ export default function JobDetails() {
             <div className="users">
               {workers &&
                 workers.map((data, key) => {
-                  return <Worker key={key} data={data} />;
+                  return (
+                    <Worker
+                      key={key}
+                      hire={hire}
+                      data={data}
+                      jobDetails={jobDetails}
+                      HireHim={HireHim}
+                    />
+                  );
                 })}
             </div>
           </div>
@@ -143,17 +179,41 @@ export default function JobDetails() {
   );
 }
 
-function Worker({ data }) {
+function Worker({ data, jobDetails, HireHim, hire }) {
+  const navigate = useNavigate();
   return (
     <div className="user">
       <div className="profile">
         <div className="cover"></div>
         <h1>{`${data.Fname} ${data.Lname}`}</h1>
       </div>
-
       <div className="actions">
-        <button>View Profile</button>
-        <button>Hire</button>
+        <button onClick={() => navigate(`/workers/dashboard/${data._id}`)}>
+          View Profile
+        </button>
+        {hire === data._id ? (
+          <button
+            disabled
+            style={{
+              cursor: "not-allowed",
+              backgroundColor: "#777",
+            }}
+          >
+            Hired
+          </button>
+        ) : (
+          <button
+            onClick={() => HireHim(data)}
+            style={
+              hire && {
+                cursor: "not-allowed",
+                backgroundColor: "#777",
+              }
+            }
+          >
+            Hire
+          </button>
+        )}
       </div>
     </div>
   );

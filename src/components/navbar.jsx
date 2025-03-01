@@ -131,6 +131,11 @@ function AuthorizedNav(props) {
                 Create a Job
               </Link>
             </li>
+            {/* <li>
+              <Link className={path === "/active-job" ? "active" : ""} to="/active-job">
+                Active Job
+              </Link>
+            </li> */}
           </>
         ) : (
           <li>
