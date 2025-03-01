@@ -66,10 +66,10 @@ const boxInfo = [
     },
     {
         id: "2",
-        title: "Get Discovered by Employers",
+        title: "Get Discovered by Settings",
         icon: <CiGlobe style={{ fontSize: "30px" }} />,
         description:
-            "Employers are looking for reliable, skilled workers. Your verified KaziLink profile helps them find you based on your real experience and abilities.",
+            "Settings are looking for reliable, skilled workers. Your verified KaziLink profile helps them find you based on your real experience and abilities.",
     },
     {
         id: "3",

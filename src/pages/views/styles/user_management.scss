@@ -1,0 +1,212 @@
+.user_management_page {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    width: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+    flex-direction: column;
+
+
+    .top-bar {
+        gap: 1rem;
+        width: 100%;
+        display: grid;
+        margin: 0 auto;
+        max-width: 1280px;
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        .buttons {
+            gap: .5rem;
+            display: flex;
+            align-items: center;
+
+            button {
+                border: none;
+                cursor: pointer;
+                background: #f2f2f2;
+                padding: .6rem 1rem;
+                border-radius: .5rem;
+
+                &.active {
+                    color: #fff;
+                    background: #0286EC;
+                }
+            }
+        }
+    }
+}
+
+
+.user-list-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1280px;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .createBtn {
+        right: 2rem;
+        bottom: 2rem;
+        color: #fff;
+        padding: 1rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: .4rem;
+        background: #0286EC;
+        position: absolute;
+    }
+
+    .list-container {
+        gap: 1rem;
+        width: 100%;
+        display: grid;
+        margin: 2rem auto;
+        max-width: 1280px;
+
+        .user {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: space-between;
+
+            h3 {
+                font-size: 1em;
+            }
+
+            .profile {
+                gap: .5rem;
+                display: flex;
+                align-items: center;
+
+                .image {
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 50%;
+                    background: #ff0053;
+                }
+
+            }
+
+            .action {
+                .menuBtn {
+                    display: flex;
+                    padding: .5rem;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid #ddd;
+                    border-radius: .5rem;
+                    cursor: pointer;
+                }
+
+                svg {
+                    color: #555;
+                }
+            }
+
+            .menu {
+                right: 0;
+                top: 3rem;
+                padding: .5rem;
+                background: #fff;
+                position: absolute;
+                border-radius: .5rem;
+                box-shadow: .3rem .3rem 1rem #ddd;
+                z-index: 10;
+
+                li {
+                    cursor: pointer;
+                    list-style: none;
+                    padding: .5rem 1rem;
+                    border-radius: .4rem;
+
+                    &:hover {
+                        background: #eee;
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+
+.add-user-form {
+    width: 100%;
+    padding: 1.5rem;
+    max-width: 500px;
+    gap: 2rem;
+    background: #ff9;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    section {
+        gap: 1.5rem;
+        display: grid;
+    }
+
+    .form {
+        gap: 1rem;
+        display: grid;
+
+        .input-area {
+            display: grid;
+            min-width: 150px;
+
+            input, select {
+                padding: 1rem;
+                font-size: 1rem;
+                border: none;
+                outline: none;
+                background: none;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+
+        .phone-area {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+
+            .input-area {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .inputs {
+                gap: .5rem;
+                display: grid;
+                grid-template-columns: 90px 1fr;
+
+                input {
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    border-bottom: 1px solid #ccc;
+
+                    &:nth-child(1) {
+                        color: #777;
+                        text-align: center;
+                    }
+                }
+
+            }
+        }
+
+        .input-group {
+            gap: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}

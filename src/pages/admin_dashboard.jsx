@@ -1,18 +1,6 @@
 import "../sass/_admin_dashboard.scss";
 import React, { useContext, useState } from "react";
-import {
-  Link,
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-
-import Dashboard from "./views/dashboard";
-import Employees from "./views/employees";
-import Employers from "./views/employers";
-import Feedback from "./views/feedback";
-import Posts from "./views/posts";
+import {Link, useLocation, Outlet} from "react-router-dom"
 
 const SidebarContext = React.createContext(null);
 
@@ -79,24 +67,14 @@ function Sidebar() {
           </div>
         </div>
 
-        <div className="links">
-          <Link className={path === "/" && "active"} to="/">
-            <p>Dashboard</p>
-          </Link>
-          <Link className={path === "/posts" && "active"} to="/posts">
-            <p>Posts</p>
-          </Link>
-          <Link className={path === "/employers" && "active"} to="/employers">
-            <p>Employers</p>
-          </Link>
-          <Link className={path === "/employees" && "active"} to="/employees">
-            <p>Employees</p>
-          </Link>
-          <Link className={path === "/feedback" && "active"} to="/feedback">
-            <p>Feedback</p>
-          </Link>
-        </div>
-      </section>
+                <div className="links">
+                    <Link className={path === "/admin/dashboard" && "active"} to="/admin/dashboard"><p>Dashboard</p></Link>
+                    <Link className={path === "/admin/dashboard/users" && "active"} to="/admin/dashboard/users"><p>User Management</p></Link>
+                    <Link className={path === "/admin/dashboard/verifications" && "active"} to="/admin/dashboard/verifications"><p>Verifications</p></Link>
+                    <Link className={path === "/admin/dashboard/postings" && "active"} to="/admin/dashboard/postings"><p>Job Postings</p></Link>
+                    {/*<Link className={path === "/admin/dashboard/settings" && "active"} to="/admin/dashboard/settings"><p>Settings</p></Link>*/}
+                </div>
+            </section>
 
       <section>
         <div className="links">
@@ -147,15 +125,9 @@ function Main() {
         </svg>
       </div>
 
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/employers" element={<Employers />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/posts" element={<Posts />} />
-        </Routes>
-      </div>
-    </div>
-  );
+            <div className="main-content">
+                <Outlet />
+            </div>
+        </div>
+    )
 }

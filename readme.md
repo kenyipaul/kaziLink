@@ -20,7 +20,7 @@
 -Can't negotiate better wages despite years of experience
 -Banks see them as high-risk customers
 -Skilled workers can't differentiate themselves from newcomers
--Employers struggle to verify claims of experience
+-Settings struggle to verify claims of experience
 
 
 ## Potential Solution Components
@@ -34,7 +34,7 @@
 
 2. Work History Verification
 
--Employers can confirm work periods via SMS
+-Settings can confirm work periods via SMS
 -Rating system for reliability and skills
 -Blockchain-based verification to prevent tampering
 -Option for video testimonials from previous employers
