@@ -1,4 +1,3 @@
-import { pink } from "@mui/material/colors";
 import "./styles/form.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -149,12 +148,20 @@ export default function Form() {
             <label htmlFor="location">
               Location <span>*</span>
             </label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              ref={locationRef}
-            />
+            {/*<input*/}
+            {/*  type="text"*/}
+            {/*  name="location"*/}
+            {/*  id="location"*/}
+            {/*  ref={locationRef}*/}
+            {/*/>*/}
+            <select name="" id="location" ref={locationRef}>
+              <option value="kigali">Kigali</option>
+              <option value="gisozi">Gisozi</option>
+              <option value="remera">Remera</option>
+              <option value="kimironko">Kimironko</option>
+              <option value="kismenti">Kismenti</option>
+              <option value="nyamirambo">Nyamirambo</option>
+            </select>
           </div>
 
           <div className="input-area">

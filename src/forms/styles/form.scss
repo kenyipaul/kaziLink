@@ -89,7 +89,7 @@
             .input-group {
                 gap: 1rem;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                //grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
 
             .inputs {
@@ -98,6 +98,7 @@
                 grid-template-columns: 3rem 1fr;
 
                 input {
+
                     &:nth-child(1) { color: #999;  pointer-events: none; text-align: center;}
                     &:nth-child(2)[type="number"]::-webkit-outer-spin-button,
                     &:nth-child(2)[type="number"]::-webkit-inner-spin-button {

@@ -95,7 +95,9 @@
                     width: 2rem;
                     height: 2rem;
                     border-radius: 50%;
-                    background: #ff0053;
+                    background-color: #f2f2f2;
+                    background-size: cover;
+                    background-position: center;
                 }
 
             }
@@ -208,14 +210,18 @@
     padding: 1.5rem;
     max-width: 500px;
     gap: 2rem;
-    background: #ff9;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
+    svg {
+        cursor: pointer;
+    }
+
     section {
         gap: 1.5rem;
         display: grid;
+        margin-bottom: 2rem;
     }
 
     .form {
@@ -272,6 +278,16 @@
             gap: 1rem;
             display: flex;
             flex-wrap: wrap;
+        }
+
+        button {
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: fit-content;
+            background: #0286EC;
+            border-radius: .5rem;
+            padding: 1rem 1.5rem;
         }
     }
 }

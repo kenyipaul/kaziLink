@@ -96,11 +96,27 @@ function User(props) {
     const [viewerState, setViewerState] = useState(false)
 
     const deleteUser = () => {
-
+        if (confirm("Are you sure you want to delete this user?")) {
+            Axios({
+                method: "delete",
+                url: `http://localhost:9000/api/v1/users/${props.data._id}`,
+            }).then((res) => {
+                if (res.data.status === "success") {
+                    alert(res.data.message)
+                    location.reload()
+                }
+            }).catch((err) => {
+                if (err.response.data.status === "error") {
+                    alert(err.response.data.message)
+                }
+            })
+        }
+        setMenuState(false)
     }
 
     const viewProfile = () => {
         setViewerState(!viewerState)
+        setMenuState(false)
     }
 
     return (
@@ -108,7 +124,9 @@ function User(props) {
         <div className="user">
             <h3 className="id">{props.data._id}</h3>
             <div className="profile">
-                <div className="image"></div>
+                <div className="image" style={{
+                    backgroundImage: `url(/assets/images/${props.data.gender == "male" ? "male.jpg" : "female.png"})`
+                }}></div>
                 <h3>{props.data.Fname} {props.data.Lname}</h3>
             </div>
             <h3>{props.data.phone}</h3>
@@ -174,6 +192,10 @@ function UserInfo(props) {
                         <div className="display-area">
                             <p>Gender</p>
                             <h3>{props.data.gender}</h3>
+                        </div>
+                        <div className="display-area">
+                            <p>Role</p>
+                            <h3>{props.data.role}</h3>
                         </div>
                     </div>
 

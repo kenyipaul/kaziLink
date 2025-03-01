@@ -147,7 +147,7 @@ function Home() {
         let user = localStorage.getItem("_kazi_user")
 
         if (user == null) {
-            navigate("/")
+            // navigate("/")
             localStorage.removeItem("_kazi_token")
             localStorage.removeItem("_kazi_user")
         } else {
