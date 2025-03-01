@@ -100,10 +100,10 @@ const router = createHashRouter([
                 path: "/otp/verification",
                 element: <OTPForm />
             },
-            {
-                path: "/chat",
-                element: <Chat />
-            }
+            // {
+            //     path: "/chat",
+            //     element: <Chat />
+            // }
         ]
     }
 ])

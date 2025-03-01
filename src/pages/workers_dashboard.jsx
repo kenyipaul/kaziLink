@@ -2,24 +2,33 @@ import { useEffect, useState } from "react";
 import { Backdrop } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { setUser } from "../store/states/user.state";
+import { useDispatch } from "react-redux";
 
 export default function WorkersDashboard() {
   const [currentPage, setCurrentPage] = useState(0);
   const [reviewState, setReviewState] = useState(false);
   const [worker, setWorker] = useState([]);
   const [feedbackContent, setFeedbackContent] = useState("");
+  const [reviewArray, setReviewArray] = useState([]);
   const { id } = useParams();
-  console.log(worker);
 
-  const HandleReview = () => {
+  const dispatch = useDispatch();
+
+  const HandleReview = async () => {
     if (feedbackContent.trim().length > 0) {
       const ob = {
         name: `${worker.Fname} ${worker.Lname}`,
         content: feedbackContent,
+        createdAt: new Date().toLocaleString(),
       };
-      // axios.post(`http://localhost:9000/api/v1/users/update`,ob)
+      const response = await axios.post(
+        `http://localhost:9000/api/v1/users/${worker._id}`,
+        { feedback: [...worker.feedback, ob] }
+      );
       setReviewState(false);
-      console.log(ob);
+      console.log( response.data.data)
+      setWorker( response.data.data)
       setFeedbackContent("");
     } else {
       alert("Please Provide a Valid Feedback");
@@ -248,22 +257,9 @@ export default function WorkersDashboard() {
               </Backdrop>
 
               <div className="review-list">
-                {worker.feedback &&
-                  worker.feedback.map((data, key) => {
-                    return <h1>feed</h1>;
-                  })}
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
-                <Review />
+                {worker.feedback.map((data, key) => {
+                  return <Review key={key} data={data} />;
+                })}
               </div>
             </div>
           </section>
@@ -273,17 +269,15 @@ export default function WorkersDashboard() {
   );
 }
 
-function Review() {
+function Review({ data }) {
+  console.log(data);
   return (
     <div className="review">
       <div className="profile"></div>
       <div className="info">
-        <h4>By John Doe</h4>
-        <h5>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id incidunt
-          nostrum placeat quidem repudiandae! Ab.
-        </h5>
-        <p>12/12/12</p>
+        <h4>By {data.name}</h4>
+        <h5>{data.content}</h5>
+        <p>{data.createdAt}</p>
       </div>
     </div>
   );
