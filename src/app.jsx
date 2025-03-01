@@ -77,7 +77,7 @@ const router = createHashRouter([
                 element: <EmployerDashboard />
             },
             {
-                path: "/workers/dashboard",
+                path: "/workers/dashboard/:id",
                 element: <WorkersDashboard />
             },
             {

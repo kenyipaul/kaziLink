@@ -1,16 +1,23 @@
 import Axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { setJobState } from "../store/states/jobs.state.js";
 import { Backdrop } from "@mui/material";
+import axios from "axios";
+import { setUser } from "../store/states/user.state.js";
 
 export default function EmployerDashboard() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [bioWriter, setBioWriter] = useState(false);
   const userState = useSelector((store) => store.userState);
+  const token = localStorage.getItem("_kazi_token");
 
+  const [aboutValue, setAboutValue] = useState(
+    userState.userData.about ? userState.userData.about : ""
+  );
   const logout = () => {
     if (confirm("Are you sure you want to logout?")) {
       localStorage.removeItem("_kazi_user");
@@ -18,7 +25,22 @@ export default function EmployerDashboard() {
       navigate("/");
     }
   };
-
+  const HandleAddAboutValues = async () => {
+    setBioWriter(false);
+    const response = await axios.post(
+      `http://localhost:9000/api/v1/users/update`,
+      {
+        about: aboutValue,
+        token,
+      }
+    );
+    console.log(response.data.data);
+    if (response.data) {
+      dispatch(setUser(response.data.data));
+      localStorage.setItem("_kazi_user", JSON.stringify(response.data.data));
+    }
+    console.log(aboutValue);
+  };
   useEffect(() => {
     Axios({
       method: "get",
@@ -47,7 +69,9 @@ export default function EmployerDashboard() {
           <div className="profile-image"></div>
           <div className="user-info">
             <h1>
-              {userState.userData.Fname} {userState.userData.Lname}, 26
+              {userState.userData.Fname} {userState.userData.Lname},{" "}
+              {new Date().getFullYear() -
+                new Date(`${userState.userData.birthday}`).getFullYear()}
             </h1>
             <h4>{userState.userData.email}</h4>
             <h4>
@@ -130,7 +154,7 @@ export default function EmployerDashboard() {
                 Edit
               </button>
             </div>
-            <p>Not Set</p>
+            <p>{userState.userData.about}</p>
 
             <Backdrop open={bioWriter}>
               <div className="about-writer">
@@ -164,8 +188,12 @@ export default function EmployerDashboard() {
                   placeholder="Write about yourself"
                   cols="30"
                   rows="10"
+                  value={aboutValue}
+                  onChange={(e) => setAboutValue(e.target.value)}
                 ></textarea>
-                <button>Update Bio</button>
+                <button onClick={() => HandleAddAboutValues()}>
+                  Update Bio
+                </button>
               </div>
             </Backdrop>
           </div>

@@ -1,11 +1,38 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Backdrop } from "@mui/material";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function WorkersDashboard() {
   const [currentPage, setCurrentPage] = useState(0);
   const [reviewState, setReviewState] = useState(false);
-  const userState = useSelector((store) => store.userState);
+  const [worker, setWorker] = useState([]);
+  const [feedbackContent, setFeedbackContent] = useState("");
+  const { id } = useParams();
+  console.log(worker);
+
+  const HandleReview = () => {
+    if (feedbackContent.trim().length > 0) {
+      const ob = {
+        name: `${worker.Fname} ${worker.Lname}`,
+        content: feedbackContent,
+      };
+      // axios.post(`http://localhost:9000/api/v1/users/update`,ob)
+      setReviewState(false);
+      console.log(ob);
+      setFeedbackContent("");
+    } else {
+      alert("Please Provide a Valid Feedback");
+    }
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:9000/api/v1/users/workers").then((response) => {
+      const workers = response.data.data;
+      const worker = workers.find((worker) => worker._id === id);
+      setWorker(worker);
+    });
+  }, []);
 
   return (
     <div className="users-dashboard">
@@ -31,12 +58,11 @@ export default function WorkersDashboard() {
               <div className="profile-image"></div>
               <div className="user-info">
                 <h1>
-                  {userState.userData.Fname} {userState.userData.Lname}, 26
+                  {worker.Fname} {worker.Lname}, 26
                 </h1>
-                <h4>{userState.userData.email}</h4>
+                <h4>{worker.email}</h4>
                 <h4>
-                  User Since:{" "}
-                  {new Date(userState.userData.createdAt).toLocaleDateString()}
+                  User Since: {new Date(worker.createdAt).toLocaleDateString()}
                 </h4>
                 <div className="reports">
                   <h3>
@@ -97,14 +123,14 @@ export default function WorkersDashboard() {
             <section>
               <div className="about-section section">
                 <h1>About Claudine</h1>
-                <p>Not Set.</p>
+                <p>{worker.about ? worker.about : "Not Set."}</p>
               </div>
 
               <div className="skill-section section">
                 <h1>Skills</h1>
                 <div className="skill-grid">
-                  {Object.values(userState.userData).length > 0 &&
-                    userState.userData.skills.map((data, key) => {
+                  {worker.skills?.length > 0 &&
+                    worker.skills.map((data, key) => {
                       return <p key={key}>{data}</p>;
                     })}
                 </div>
@@ -113,9 +139,10 @@ export default function WorkersDashboard() {
               <div className="skill-section section">
                 <h1>Values</h1>
                 <div className="skill-grid">
-                  <p>Honesty</p>
-                  <p>Good Communicator</p>
-                  <p>God Fearing</p>
+                  {worker.values?.length > 0 &&
+                    worker.values.map((data, key) => {
+                      return <p key={key}>{data}</p>;
+                    })}
                 </div>
               </div>
 
@@ -213,12 +240,18 @@ export default function WorkersDashboard() {
                     id=""
                     cols="30"
                     rows="10"
+                    value={feedbackContent}
+                    onChange={(e) => setFeedbackContent(e.target.value)}
                   ></textarea>
-                  <button>Post Review</button>
+                  <button onClick={() => HandleReview()}>Post Review</button>
                 </div>
               </Backdrop>
 
               <div className="review-list">
+                {worker.feedback &&
+                  worker.feedback.map((data, key) => {
+                    return <h1>feed</h1>;
+                  })}
                 <Review />
                 <Review />
                 <Review />

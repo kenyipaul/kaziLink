@@ -13,41 +13,47 @@ export default function OTPForm() {
   const dispatch = useDispatch();
   const userState = useSelector((store) => store.userState);
 
-  console.log("old: ", userState);
-
   const HandlSubmit = async () => {
-    const ob = {
-      phone: "+250" + number,
-      token,
-    };
-    const resoponse = await axios.post(
-      `http://localhost:9000/api/v1/sms/send-otp`,
-      ob
-    );
-    if (resoponse.statusText === "OK") {
-      alert("Verification code sent successfully!");
-      setShowVerifiy(true);
+    if (number.trim().length > 0) {
+      const ob = {
+        phone: "+250" + number,
+        token,
+      };
+      const resoponse = await axios.post(
+        `http://localhost:9000/api/v1/sms/send-otp`,
+        ob
+      );
+      if (resoponse.statusText === "OK") {
+        alert("Verification code sent successfully!");
+        setShowVerifiy(true);
+      }
+    } else {
+      alert("Please enter a valid phone number!");
     }
   };
   const HandleVerify = async () => {
-    const ob = {
-      otp: verificationCode,
-      token,
-    };
-    const resoponse = await axios.post(
-      `http://localhost:9000/api/v1/sms/verify-otp`,
-      ob
-    );
-    if (resoponse.data.message === "The OTP is Valid") {
-      alert("Verification code sent successfully!");
-      const newUser = { ...userState.userData, verifyNumber: true };
-      localStorage.setItem("_kazi_user", JSON.stringify(newUser));
-      await dispatch(setUser({ ...newUser }));
-      navigate("/");
+    if (number.trim().length > 0) {
+      const ob = {
+        otp: verificationCode,
+        token,
+      };
+      const resoponse = await axios.post(
+        `http://localhost:9000/api/v1/sms/verify-otp`,
+        ob
+      );
+      if (resoponse.data.message === "The OTP is Valid") {
+        alert("Verification code sent successfully!");
+        const newUser = { ...userState.userData, verifyNumber: true };
+        localStorage.setItem("_kazi_user", JSON.stringify(newUser));
+        await dispatch(setUser({ ...newUser }));
+        navigate("/");
 
-      console.log(newUser);
+        console.log(newUser);
+      } else {
+        alert("Invalid OTP!");
+      }
     } else {
-      alert("Invalid OTP!");
+      alert("Please enter a valid phone number!");
     }
   };
   const HandleResend = async () => {
