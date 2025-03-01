@@ -17,8 +17,14 @@ import WorkersDashboard from "./pages/workers_dashboard.jsx";
 import OTPForm from "./forms/modules/otp_form.jsx";
 import AdminDashboard from "./pages/admin_dashboard.jsx";
 
-import Posts from "./pages/views/posts.jsx";
+import JobPostings from "./pages/views/job_postings.jsx";
 import Dashboard from "./pages/views/dashboard.jsx";
+import Verifications from "./pages/views/verifications.jsx";
+import Settings from "./pages/views/settings.jsx";
+import UserManagement, {UserDetails} from "./pages/views/user_management.jsx";
+import CreateUser from "./pages/views/create_user.jsx";
+// import Verification from "./pages/views/verification.jsx";
+// import Settings from "./pages/views/settings.jsx";
 
 // const userState = useSelector(store => store.userState);
 
@@ -32,8 +38,30 @@ const router = createHashRouter([
                 element: <Dashboard />
             },
             {
-                path: "/admin/dashboard/jobs",
-                element: <Posts />
+                path: "/admin/dashboard/users",
+                element: <UserManagement />,
+                children: [
+                    {
+                        path: "/admin/dashboard/users",
+                        element: <UserDetails />,
+                    },
+                    {
+                        path: "/admin/dashboard/users/create",
+                        element: <CreateUser />,
+                    }
+                ]
+            },
+            {
+                path: "/admin/dashboard/postings",
+                element: <JobPostings />
+            },
+            {
+                path: "/admin/dashboard/verifications",
+                element: <Verifications />
+            },
+            {
+                path: "/admin/dashboard/settings",
+                element: <Settings />
             }
         ]
     },

@@ -1,0 +1,56 @@
+.job-postings-page {
+
+    .job-postings-content {
+        gap: 1rem;
+        padding: 1rem;
+        margin: 0 auto;
+        display: grid;
+        max-width: 1280px;
+
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        .job-list {
+            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
+            .job-post {
+                padding: 1.5rem;
+                border-radius: 1rem;
+                border: 1px solid #ccc;
+
+                .top-bar {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    button {
+                        display: flex;
+                        cursor: pointer;
+                        padding: .3rem;
+                        background: none;
+                        align-items: center;
+                        border-radius: .5rem;
+                        border: 1px solid #ccc;
+                        justify-content: center;
+                    }
+                }
+
+                h2 {
+                    font-size: 1.2rem;
+                }
+
+                p {
+                    color: #555;
+                    hyphens: auto;
+                    margin: .5rem 0;
+                }
+
+                h3 {
+                    font-size: .9rem;
+                }
+            }
+        }
+    }
+}
