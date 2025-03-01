@@ -400,3 +400,25 @@
     }
 
 }
+.gallery-history {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 20px;
+    img {
+        width: 100%;
+    }
+}
+.add_image {
+    margin: 20px 0;
+    input {
+        width: 89px;
+        overflow: hidden;
+    }
+    label {
+        background-color: #4CAF50;
+        cursor: pointer;
+        padding: 3px 10px;
+        border-radius: 5px;
+        
+    }
+}
