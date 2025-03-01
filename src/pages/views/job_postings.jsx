@@ -17,10 +17,17 @@ export default function JobPostings() {
     });
   }, []);
 
+<<<<<<< HEAD
   return (
     <div className="job-postings-page">
       <div className="job-postings-content">
         <h1>Job Listings</h1>
+=======
+    useEffect(() => {
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/jobs",
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
         <div className="job-list">
           {jobs.map((data, key) => {

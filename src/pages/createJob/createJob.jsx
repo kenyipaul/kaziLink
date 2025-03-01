@@ -29,6 +29,7 @@ export default function CreateJob() {
 
     const token = localStorage.getItem("_kazi_token");
 
+<<<<<<< HEAD
     if (token == null) {
       navigate("/");
     } else {
@@ -53,6 +54,36 @@ export default function CreateJob() {
           navigate("/jobs");
         }
       });
+=======
+		const type = typeRef.current.value;
+        const title = titleRef.current.value;
+        const payment = paymentRef.current.value;
+        const endDate = endDateRef.current.value;
+        const startDate = startDateRef.current.value;
+        const location = locationRef.current.value;
+        const description = descriptionRef.current.value;
+
+		const token = localStorage.getItem("_kazi_token");
+
+		if (token == null) {
+			navigate("/");
+		} else {
+			Axios({
+				method: "POST",
+				url: "https://kazilink.onrender.com/api/v1/jobs",
+				data: {
+					title, payment, endDate, startDate, location, description, type, token
+				}
+			}).then((res) => {
+				console.log(res);
+				if (res.data.status === "success") {
+					res.data.data && dispatch(setJobState(res.data.data.job));
+					alert("Job successfully created");
+					navigate("/jobs");
+				}
+			})
+		}
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
     }
   };
 

@@ -23,6 +23,7 @@ export default function Dashboard() {
       setWorkers(res.data.data);
     });
 
+<<<<<<< HEAD
     Axios({
       method: "get",
       url: "http://localhost:9000/api/v1/jobs",
@@ -32,13 +33,24 @@ export default function Dashboard() {
       }
     });
   }, []);
+=======
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/users/employees",
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
   useEffect(() => {
     setAllUsers([...workers, ...employers]);
   }, [employers, workers]);
 
+<<<<<<< HEAD
   useEffect(() => {
     const results = [];
+=======
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
     allUsers.filter((user) => {
       if (user.verifyEmail === true) {
@@ -49,10 +61,16 @@ export default function Dashboard() {
     setVerifiedUsers(results);
   }, [allUsers, setAllUsers]);
 
+<<<<<<< HEAD
   return (
     <div className="dashboard-view">
       <div className="dashboard">
         <h2>Good Afternoon John!</h2>
+=======
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/jobs",
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
         <div className="dash-reports">
           <div className="report">

@@ -20,7 +20,7 @@ export default function JobDetails() {
   const apply = () => {
     Axios({
       method: "PATCH",
-      url: `http://localhost:9000/api/v1/jobs/${job_id}`,
+      url: `https://kazilink.onrender.com/api/v1/jobs/${job_id}`,
       data: {
         workers: [...jobDetails.workers, userState.userData._id],
       },
@@ -34,7 +34,7 @@ export default function JobDetails() {
   };
   const HandleApplication = async () => {
     await axios
-      .get(`http://localhost:9000/api/v1/users/workers`)
+      .get(`https://kazilink.onrender.com/api/v1/users/workers`)
       .then((response) => {
         const workers = response.data.data;
         const neworkers = workers.filter((worker) =>

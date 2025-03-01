@@ -53,7 +53,7 @@ export default function Form() {
     axios
       .post(
         // "https://d4fc-105-179-6-194.ngrok-free.app/api/v1/users/signup",
-        "http://localhost:9000/api/v1/users/signup",
+        "https://kazilink.onrender.com/api/v1/users/signup",
         {
           Fname: firstName,
           Lname: secondName,

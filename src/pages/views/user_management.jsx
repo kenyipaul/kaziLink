@@ -64,9 +64,28 @@ function Workers() {
     });
   }, []);
 
+<<<<<<< HEAD
   return workers.map((worker, key) => {
     return <User data={worker} key={key} />;
   });
+=======
+    useEffect(() => {
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
+
+        }).then((res) => {
+            setWorkers(res.data.data);
+        })
+
+    }, []);
+
+    return (
+        workers.map((worker, key) => {
+            return <User data={worker} key={key} />
+        })
+    )
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 }
 
 function Employers() {
@@ -81,9 +100,28 @@ function Employers() {
     });
   }, []);
 
+<<<<<<< HEAD
   return employers.map((employer, key) => {
     return <User data={employer} key={key} />;
   });
+=======
+    useEffect(() => {
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/users/employees",
+
+        }).then((res) => {
+            setEmployers(res.data.data);
+        })
+
+    }, []);
+
+    return (
+        employers.map((employer, key) => {
+            return <User data={employer} key={key} />
+        })
+    )
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 }
 
 const ViewerContext = createContext();
@@ -92,6 +130,7 @@ function User(props) {
   const [menuState, setMenuState] = useState(false);
   const [viewerState, setViewerState] = useState(false);
 
+<<<<<<< HEAD
   const deleteUser = () => {
     if (confirm("Are you sure you want to delete this user?")) {
       Axios({
@@ -109,6 +148,28 @@ function User(props) {
             alert(err.response.data.message);
           }
         });
+=======
+    const [menuState, setMenuState] = useState(false)
+    const [viewerState, setViewerState] = useState(false)
+
+    const deleteUser = () => {
+        if (confirm("Are you sure you want to delete this user?")) {
+            Axios({
+                method: "delete",
+                url: `https://kazilink.onrender.com/api/v1/users/${props.data._id}`,
+            }).then((res) => {
+                if (res.data.status === "success") {
+                    alert(res.data.message)
+                    location.reload()
+                }
+            }).catch((err) => {
+                if (err.response.data.status === "error") {
+                    alert(err.response.data.message)
+                }
+            })
+        }
+        setMenuState(false)
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
     }
     setMenuState(false);
   };

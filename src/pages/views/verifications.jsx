@@ -21,11 +21,18 @@ export default function Verifications() {
     });
   }, []);
 
+<<<<<<< HEAD
   return (
     <div className="verifications-page">
       <UserInfoContext.Provider value={[userInfoState, setUserInfoState]}>
         <div className="page-content">
           <h1>Verification Queue</h1>
+=======
+    useEffect(() => {
+        Axios({
+            method: "get",
+            url: "https://kazilink.onrender.com/api/v1/users/workers",
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
           <UserInfo state={userInfoState} />
 

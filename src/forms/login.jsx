@@ -26,11 +26,22 @@ export default function Login() {
           dispatch(setAuthorized(true));
           dispatch(setUser(response.data.data));
 
+<<<<<<< HEAD
           localStorage.setItem("_kazi_token", response.data.token);
           localStorage.setItem(
             "_kazi_user",
             JSON.stringify(response.data.data)
           );
+=======
+        Axios({
+            method: 'POST',
+            url: "https://kazilink.onrender.com/api/v1/users/login",
+            data: { password, phone: `+250${phone}` }
+        }).then((response) => {
+            if (response.data.success === "success") {
+                dispatch(setAuthorized(true));
+                dispatch(setUser(response.data.data));
+>>>>>>> cb90936fde9eb6f73633f29dab321df07061efce
 
           if (response.data.data.role === "employer") {
             navigate("/workers");

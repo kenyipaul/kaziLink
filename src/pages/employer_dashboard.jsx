@@ -30,7 +30,7 @@ export default function EmployerDashboard() {
   const HandleAddAboutValues = async () => {
     setBioWriter(false);
     const response = await axios.post(
-      `http://localhost:9000/api/v1/users/update`,
+      `https://kazilink.onrender.com/api/v1/users/update`,
       {
         about: aboutValue,
         token,
@@ -73,7 +73,7 @@ export default function EmployerDashboard() {
   useEffect(() => {
     Axios({
       method: "get",
-      url: "http://localhost:9000/api/v1/jobs",
+      url: "https://kazilink.onrender.com/api/v1/jobs",
     }).then((res) => {
       if (res.data.status === "success") {
         let jobs = res.data.data.jobs;

@@ -13,7 +13,7 @@ export default function JobsPage() {
   useEffect(() => {
     Axios({
       method: "get",
-      url: "http://localhost:9000/api/v1/jobs",
+      url: "https://kazilink.onrender.com/api/v1/jobs",
     }).then((res) => {
       if (res.data.status === "success") {
         dispatch(setJobState(res.data.data.jobs));
